@@ -16,6 +16,7 @@ class App {
     this.initAuth();
     this.initProfileCustomization();
     this.initNavigation();
+    this.initMobileDrawer();
     this.initDateTimeGreeting();
     this.initSettings();
 
@@ -431,6 +432,33 @@ class App {
     handleRoute();
   }
 
+  initMobileDrawer() {
+    const toggleBtn = document.getElementById('mobile-sidebar-toggle-btn');
+    const closeBtn = document.getElementById('mobile-sidebar-close-btn');
+    const backdrop = document.getElementById('mobile-sidebar-backdrop');
+    const sidebar = document.getElementById('app-sidebar');
+
+    const openDrawer = () => {
+      if (sidebar) sidebar.classList.remove('-translate-x-full');
+      if (backdrop) backdrop.classList.remove('hidden');
+    };
+
+    const closeDrawer = () => {
+      if (sidebar) sidebar.classList.add('-translate-x-full');
+      if (backdrop) backdrop.classList.add('hidden');
+    };
+
+    if (toggleBtn) toggleBtn.addEventListener('click', openDrawer);
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (backdrop) backdrop.addEventListener('click', closeDrawer);
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) {
+        closeDrawer();
+      }
+    });
+  }
+
   switchView(path) {
     this.navLinks.forEach(link => {
       const isCurrent = link.dataset.path === path;
@@ -450,6 +478,14 @@ class App {
         view.classList.remove('flex');
       }
     });
+
+    // Close mobile drawer on navigation
+    const sidebar = document.getElementById('app-sidebar');
+    const backdrop = document.getElementById('mobile-sidebar-backdrop');
+    if (window.innerWidth < 1024 && sidebar && !sidebar.classList.contains('-translate-x-full')) {
+      sidebar.classList.add('-translate-x-full');
+      if (backdrop) backdrop.classList.add('hidden');
+    }
   }
 
   initDateTimeGreeting() {

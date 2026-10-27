@@ -106,3 +106,30 @@ input:focus, textarea:focus, select:focus, button:focus-visible {
   outline: 1px solid var(--color-primary, #e64528) !important;
   outline-offset: 1px;
 }
+
+/* Cross-Platform Mobile & Touch Optimization */
+@media (max-width: 1023px) {
+  #app-sidebar.-translate-x-full {
+    transform: translateX(-100%);
+  }
+  #app-sidebar:not(.-translate-x-full) {
+    transform: translateX(0);
+  }
+}
+
+/* iOS Safari Safe Area Inset Support */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  main {
+    padding-bottom: max(4rem, calc(2.5rem + env(safe-area-inset-bottom)));
+  }
+  aside {
+    padding-bottom: max(1.25rem, calc(1rem + env(safe-area-inset-bottom)));
+  }
+}
+
+/* Touch manipulation & tap highlight removal for iOS/Android */
+button, a, input, select, textarea, .nav-item {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+

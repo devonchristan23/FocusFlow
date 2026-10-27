@@ -16,7 +16,7 @@ class SoundSystem {
       }
     }
     if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
+      this.ctx.resume().catch(() => {});
     }
   }
 
@@ -142,3 +142,14 @@ class SoundSystem {
 }
 
 export const soundSystem = new SoundSystem();
+
+// Cross-platform mobile audio unlock on first user gesture
+if (typeof window !== 'undefined') {
+  const unlockAudioOnGesture = () => {
+    soundSystem.initContext();
+    window.removeEventListener('click', unlockAudioOnGesture);
+    window.removeEventListener('touchstart', unlockAudioOnGesture);
+  };
+  window.addEventListener('click', unlockAudioOnGesture, { passive: true, once: true });
+  window.addEventListener('touchstart', unlockAudioOnGesture, { passive: true, once: true });
+}

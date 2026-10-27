@@ -2,9 +2,15 @@
 <html class="dark" lang="id">
 <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
   <title>ponzfocus — Daily Mindful Productivity</title>
   <meta content="ponzfocus — Independent Swiss-Japanese minimalist productivity workspace with Pomodoro Focus Engine, Kanban Tasks, Habit Matrix, and Reflective Journal." name="description"/>
+  <meta name="theme-color" content="#111213"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="ponzfocus"/>
+  <meta name="application-name" content="ponzfocus"/>
+  <meta name="format-detection" content="telephone=no"/>
   
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -68,8 +74,8 @@
       }
     };
   </script>
-  <script type="module" crossorigin src="/assets/index-ByIhv12B.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-BMlpbBi4.css">
+  <script type="module" crossorigin src="/assets/index-D1p3DktZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-B3NtTLae.css">
 </head>
 <body class="bg-surface font-body-md text-on-surface antialiased min-h-screen selection:bg-primary selection:text-on-primary">
 
@@ -361,18 +367,26 @@
 
   <!-- ==================== DASHBOARD SHELL (Authenticated View) ==================== -->
   <div class="hidden" id="app-shell">
-    <!-- Left Swiss Architectural Sidebar -->
-    <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low border-r border-surface-container-high/50 z-50 flex flex-col justify-between p-5">
+    <!-- Mobile Backdrop Overlay -->
+    <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden lg:hidden transition-opacity" id="mobile-sidebar-backdrop"></div>
+
+    <!-- Left Swiss Architectural Sidebar (Responsive Off-Canvas Drawer on Mobile / Fixed on Desktop) -->
+    <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low border-r border-surface-container-high/50 z-50 flex flex-col justify-between p-5 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" id="app-sidebar">
       <div class="flex flex-col gap-6">
-        <!-- Brand Mark -->
-        <div class="flex items-center gap-3 pt-1">
-          <div class="w-7 h-7 bg-primary flex items-center justify-center text-on-primary font-mono text-xs font-bold tracking-tight">
-            P
+        <!-- Brand Mark & Mobile Close Button -->
+        <div class="flex items-center justify-between pt-1">
+          <div class="flex items-center gap-3">
+            <div class="w-7 h-7 bg-primary flex items-center justify-center text-on-primary font-mono text-xs font-bold tracking-tight">
+              P
+            </div>
+            <div class="flex flex-col">
+              <span class="font-headline-sm text-lg text-on-surface tracking-tight font-bold lowercase">ponzfocus<span class="text-primary">.</span></span>
+              <span class="font-label-sm text-[10px] text-outline uppercase tracking-widest">STUDIO VER. 1.0</span>
+            </div>
           </div>
-          <div class="flex flex-col">
-            <span class="font-headline-sm text-lg text-on-surface tracking-tight font-bold lowercase">ponzfocus<span class="text-primary">.</span></span>
-            <span class="font-label-sm text-[10px] text-outline uppercase tracking-widest">STUDIO VER. 1.0</span>
-          </div>
+          <button class="lg:hidden p-1.5 text-outline hover:text-on-surface transition-colors" id="mobile-sidebar-close-btn" title="Tutup Menu" type="button">
+            <span class="material-symbols-outlined text-[20px]">close</span>
+          </button>
         </div>
 
         <!-- Metric Widget in Sidebar -->
@@ -440,26 +454,32 @@
       </div>
     </aside>
 
-    <!-- Top Header Bar -->
-    <div class="pl-72">
-      <header class="fixed top-0 left-72 right-0 h-16 bg-surface/90 backdrop-blur-md z-40 flex items-center justify-between px-space-lg border-b border-surface-container-high/40">
-        <div class="flex items-center gap-4">
+    <!-- Main Content Container with Responsive Width & Left Padding on Desktop -->
+    <div class="w-full lg:pl-72 flex flex-col min-h-screen">
+      <!-- Top Responsive Header Bar -->
+      <header class="fixed top-0 left-0 lg:left-72 right-0 h-16 bg-surface/90 backdrop-blur-md z-30 flex items-center justify-between px-4 sm:px-6 lg:px-8 border-b border-surface-container-high/40">
+        <div class="flex items-center gap-3">
+          <!-- Mobile Hamburger Toggle Button -->
+          <button class="lg:hidden p-1.5 text-on-surface hover:bg-surface-container transition-colors" id="mobile-sidebar-toggle-btn" title="Buka Menu" type="button">
+            <span class="material-symbols-outlined text-[22px]">menu</span>
+          </button>
+
           <div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-xs">
             <span class="material-symbols-outlined text-[16px] text-outline">calendar_today</span>
-            <span class="text-on-surface font-mono" id="current-date-label">Selasa, 24 Oktober</span>
+            <span class="text-on-surface font-mono hidden sm:inline" id="current-date-label">Selasa, 24 Oktober</span>
           </div>
-          <span class="text-outline-variant font-label-sm">•</span>
+          <span class="text-outline-variant font-label-sm hidden sm:inline">•</span>
           <div class="inline-flex items-center gap-1.5 px-2 py-0.5 bg-surface-container border border-surface-container-high text-secondary font-label-sm text-[11px] uppercase tracking-wider">
             <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-            <span>Offline Ready (Local)</span>
+            <span>Offline Ready</span>
           </div>
         </div>
 
         <!-- Top Right Actions -->
-        <div class="flex items-center gap-4">
-          <button class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-on-primary hover:opacity-95 font-label-sm text-xs tracking-wider uppercase transition-all shadow-sm" id="global-new-flow-btn" type="button">
+        <div class="flex items-center gap-2 sm:gap-4">
+          <button class="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-primary text-on-primary hover:opacity-95 font-label-sm text-xs tracking-wider uppercase transition-all shadow-sm" id="global-new-flow-btn" type="button">
             <span class="material-symbols-outlined text-[16px]">add</span>
-            <span>Item Baru</span>
+            <span class="hidden xs:inline sm:inline">Item Baru</span>
           </button>
 
           <div class="h-4 w-[1px] bg-surface-container-high"></div>
@@ -469,7 +489,7 @@
             <div class="w-7 h-7 bg-primary text-on-primary flex items-center justify-center font-bold overflow-hidden font-mono text-xs" id="header-avatar-box">
               <span id="header-avatar-initial">A</span>
             </div>
-            <span class="font-body-sm text-xs text-on-surface font-medium hidden sm:inline" id="header-user-nickname">Alex</span>
+            <span class="font-body-sm text-xs text-on-surface font-medium hidden md:inline" id="header-user-nickname">Alex</span>
             <span class="material-symbols-outlined text-[14px] text-outline">tune</span>
           </div>
 
@@ -480,8 +500,8 @@
       </header>
 
       <!-- Main Dynamic Content Container -->
-      <main class="relative pt-16 bg-surface min-h-screen px-space-lg pb-16">
-        <div class="flex flex-col w-full max-w-7xl mx-auto pt-6">
+      <main class="relative pt-16 bg-surface min-h-screen px-4 sm:px-6 lg:px-8 pb-16">
+        <div class="flex flex-col w-full max-w-7xl mx-auto pt-4 sm:pt-6">
 
           <!-- ==================== VIEW 1: DASHBOARD ==================== -->
           <section class="view-section flex flex-col w-full" id="view-dashboard">
