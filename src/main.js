@@ -33,7 +33,7 @@ class App {
   }
 
   initTheme() {
-    const currentTheme = store.state.settings.theme || 'deep-ocean';
+    const currentTheme = store.state.settings.theme || 'kyoto-ink';
     ThemeManager.applyTheme(currentTheme);
     this.updateThemeCardActiveState(currentTheme);
 
@@ -78,18 +78,25 @@ class App {
     const landingSignInBtn = document.getElementById('landing-sign-in-btn');
     const landingSignUpBtn = document.getElementById('landing-sign-up-btn');
     const heroCtaBtn = document.getElementById('hero-cta-btn');
+    const heroCtaBtn2 = document.getElementById('hero-cta-btn-2');
     const closeAuthModalBtn = document.getElementById('close-auth-modal-btn');
     const logoutBtn = document.getElementById('logout-btn');
     const headerLogoutBtn = document.getElementById('header-logout-btn');
 
     // Auth Tabs & Forms
+    this.authTabsContainer = document.getElementById('auth-tabs-row');
     this.authTabSignIn = document.getElementById('auth-tab-signin');
     this.authTabSignUp = document.getElementById('auth-tab-signup');
     this.signInForm = document.getElementById('signin-form');
     this.signUpForm = document.getElementById('signup-form');
+    this.forgotForm = document.getElementById('forgot-form');
+    this.toForgotPasswordBtn = document.getElementById('to-forgot-password-btn');
+    this.toSigninFromForgotBtn = document.getElementById('to-signin-from-forgot-btn');
+
     this.authModalTitle = document.getElementById('auth-modal-title');
     this.authModalSubtitle = document.getElementById('auth-modal-subtitle');
     this.authErrorAlert = document.getElementById('auth-error-alert');
+    this.authSuccessAlert = document.getElementById('auth-success-alert');
 
     const openAuthModal = (mode = 'signin') => {
       soundSystem.playTick();
@@ -107,15 +114,19 @@ class App {
         this.viewLogin.classList.remove('flex');
       }
       if (this.authErrorAlert) this.authErrorAlert.classList.add('hidden');
+      if (this.authSuccessAlert) this.authSuccessAlert.classList.add('hidden');
     };
 
     if (landingSignInBtn) landingSignInBtn.addEventListener('click', () => openAuthModal('signin'));
     if (landingSignUpBtn) landingSignUpBtn.addEventListener('click', () => openAuthModal('signup'));
     if (heroCtaBtn) heroCtaBtn.addEventListener('click', () => openAuthModal('signup'));
+    if (heroCtaBtn2) heroCtaBtn2.addEventListener('click', () => openAuthModal('signup'));
     if (closeAuthModalBtn) closeAuthModalBtn.addEventListener('click', closeAuthModal);
 
     if (this.authTabSignIn) this.authTabSignIn.addEventListener('click', () => this.switchAuthTab('signin'));
     if (this.authTabSignUp) this.authTabSignUp.addEventListener('click', () => this.switchAuthTab('signup'));
+    if (this.toForgotPasswordBtn) this.toForgotPasswordBtn.addEventListener('click', () => this.switchAuthTab('forgot'));
+    if (this.toSigninFromForgotBtn) this.toSigninFromForgotBtn.addEventListener('click', () => this.switchAuthTab('signin'));
 
     // SIGN IN FORM SUBMIT
     if (this.signInForm) {
@@ -154,6 +165,36 @@ class App {
       });
     }
 
+    // FORGOT PASSWORD FORM SUBMIT
+    if (this.forgotForm) {
+      this.forgotForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('forgot-email-input').value.trim();
+        const newPassword = document.getElementById('forgot-password-input').value;
+        const confirmPassword = document.getElementById('forgot-confirm-input').value;
+
+        if (newPassword !== confirmPassword) {
+          this.showAuthError('Konfirmasi password tidak cocok. Silakan periksa kembali.');
+          return;
+        }
+
+        try {
+          store.resetPassword({ email, newPassword });
+          soundSystem.playTick();
+          this.showAuthSuccess('Password berhasil diperbarui! Mengalihkan ke form Sign In...');
+          setTimeout(() => {
+            this.switchAuthTab('signin');
+            const signinEmail = document.getElementById('signin-email-input');
+            if (signinEmail) signinEmail.value = email;
+            const signinPass = document.getElementById('signin-password-input');
+            if (signinPass) signinPass.focus();
+          }, 1200);
+        } catch (err) {
+          this.showAuthError(err.message);
+        }
+      });
+    }
+
     const handleLogout = () => {
       if (confirm('Apakah kamu yakin ingin keluar (logout)?')) {
         store.logout();
@@ -170,28 +211,49 @@ class App {
 
   switchAuthTab(mode) {
     if (this.authErrorAlert) this.authErrorAlert.classList.add('hidden');
+    if (this.authSuccessAlert) this.authSuccessAlert.classList.add('hidden');
 
     if (mode === 'signin') {
-      this.authTabSignIn.className = 'py-2 rounded-lg bg-primary text-on-primary font-semibold transition-all shadow-xs';
-      this.authTabSignUp.className = 'py-2 rounded-lg text-on-surface-variant hover:text-on-surface transition-all';
-      this.signInForm.classList.remove('hidden');
-      this.signUpForm.classList.add('hidden');
-      if (this.authModalTitle) this.authModalTitle.textContent = 'Sign In ke FocusFlow';
-      if (this.authModalSubtitle) this.authModalSubtitle.textContent = 'Masuk untuk melanjutkan sesi produktivitas kamu.';
-    } else {
-      this.authTabSignUp.className = 'py-2 rounded-lg bg-primary text-on-primary font-semibold transition-all shadow-xs';
-      this.authTabSignIn.className = 'py-2 rounded-lg text-on-surface-variant hover:text-on-surface transition-all';
-      this.signUpForm.classList.remove('hidden');
-      this.signInForm.classList.add('hidden');
-      if (this.authModalTitle) this.authModalTitle.textContent = 'Sign Up Akun Baru';
-      if (this.authModalSubtitle) this.authModalSubtitle.textContent = 'Buat akun produktivitas kamu dalam beberapa detik.';
+      if (this.authTabsContainer) this.authTabsContainer.classList.remove('hidden');
+      if (this.authTabSignIn) this.authTabSignIn.className = 'py-2 rounded bg-primary text-on-primary font-semibold transition-all shadow-xs';
+      if (this.authTabSignUp) this.authTabSignUp.className = 'py-2 rounded text-on-surface-variant hover:text-on-surface transition-all';
+      if (this.signInForm) this.signInForm.classList.remove('hidden');
+      if (this.signUpForm) this.signUpForm.classList.add('hidden');
+      if (this.forgotForm) this.forgotForm.classList.add('hidden');
+      if (this.authModalTitle) this.authModalTitle.textContent = 'Sign In ke ponzfocus';
+      if (this.authModalSubtitle) this.authModalSubtitle.textContent = 'Masuk untuk melanjutkan sesi produktivitas terstruktur Anda.';
+    } else if (mode === 'signup') {
+      if (this.authTabsContainer) this.authTabsContainer.classList.remove('hidden');
+      if (this.authTabSignUp) this.authTabSignUp.className = 'py-2 rounded bg-primary text-on-primary font-semibold transition-all shadow-xs';
+      if (this.authTabSignIn) this.authTabSignIn.className = 'py-2 rounded text-on-surface-variant hover:text-on-surface transition-all';
+      if (this.signUpForm) this.signUpForm.classList.remove('hidden');
+      if (this.signInForm) this.signInForm.classList.add('hidden');
+      if (this.forgotForm) this.forgotForm.classList.add('hidden');
+      if (this.authModalTitle) this.authModalTitle.textContent = 'Registrasi Akun ponzfocus';
+      if (this.authModalSubtitle) this.authModalSubtitle.textContent = 'Mulai ruang kerja fokus Anda langsung di browser tanpa pelacak.';
+    } else if (mode === 'forgot') {
+      if (this.authTabsContainer) this.authTabsContainer.classList.add('hidden');
+      if (this.signInForm) this.signInForm.classList.add('hidden');
+      if (this.signUpForm) this.signUpForm.classList.add('hidden');
+      if (this.forgotForm) this.forgotForm.classList.remove('hidden');
+      if (this.authModalTitle) this.authModalTitle.textContent = 'Pemulihan Password';
+      if (this.authModalSubtitle) this.authModalSubtitle.textContent = 'Masukkan email terdaftar dan atur password baru akun ponzfocus.';
     }
   }
 
   showAuthError(msg) {
+    if (this.authSuccessAlert) this.authSuccessAlert.classList.add('hidden');
     if (this.authErrorAlert) {
       this.authErrorAlert.textContent = msg;
       this.authErrorAlert.classList.remove('hidden');
+    }
+  }
+
+  showAuthSuccess(msg) {
+    if (this.authErrorAlert) this.authErrorAlert.classList.add('hidden');
+    if (this.authSuccessAlert) {
+      this.authSuccessAlert.textContent = msg;
+      this.authSuccessAlert.classList.remove('hidden');
     }
   }
 

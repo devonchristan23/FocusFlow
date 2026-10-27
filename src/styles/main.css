@@ -1,44 +1,108 @@
+/* ponzfocus — Independent Swiss / Japanese Studio Typography & System CSS */
+
 @layer base {
+  :root {
+    --font-heading: 'Newsreader', Georgia, serif;
+    --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
   html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
+    background-color: var(--color-background, #111213);
+    color: var(--color-on-surface, #f4f3ed);
     overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
   }
   
-  h1, h2, h3, h4, .font-display {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+  h1, h2, h3, .font-serif-heading, .font-display {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
+
+  code, kbd, samp, pre, .font-mono-data, .font-mono {
+    font-family: var(--font-mono);
   }
   
   ::-webkit-scrollbar {
-    display: none;
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.22);
   }
 }
 
-/* Custom Glassmorphism & Micro-animations */
-.glass-panel {
-  background: rgba(19, 27, 46, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+/* Swiss Grid & Hairline Architecture */
+.swiss-border {
+  border: 1px solid var(--color-outline-variant, rgba(255, 255, 255, 0.08));
 }
 
-.glow-bento {
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.swiss-border-b {
+  border-bottom: 1px solid var(--color-outline-variant, rgba(255, 255, 255, 0.08));
 }
 
-.glow-bento:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
+.swiss-border-t {
+  border-top: 1px solid var(--color-outline-variant, rgba(255, 255, 255, 0.08));
 }
 
-/* Section Smooth Transitions */
+.swiss-border-r {
+  border-right: 1px solid var(--color-outline-variant, rgba(255, 255, 255, 0.08));
+}
+
+.swiss-grid-bg {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Studio Minimalist Card hover */
+.studio-card {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.studio-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Section Smooth View Transitions */
 .view-section {
-  animation: fadeIn 0.2s ease-in-out;
+  animation: studioFade 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes studioFade {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Numbered Matrix Stamp */
+.index-stamp {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Focus outline for accessibility without glowing neon */
+input:focus, textarea:focus, select:focus, button:focus-visible {
+  outline: 1px solid var(--color-primary, #e64528) !important;
+  outline-offset: 1px;
 }

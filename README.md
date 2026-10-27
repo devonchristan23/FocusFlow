@@ -1,28 +1,28 @@
-# FocusFlow - Daily Productivity Web App
+# ponzfocus — Daily Mindful Productivity
 
-A mindful daily productivity web application designed to help you stay focused, organized, and intentional throughout the day.
+An independent, Swiss-Japanese minimalist productivity workspace designed for calm deep work, zero cognitive drift, and offline-first data sovereignty.
 
-## Features
+## Architectural Features
 
-- ⏱️ **Pomodoro Timer**: Customizable focus and break sessions with audio chimes and circular progress visualizer.
-- 📋 **Kanban Tasks**: Drag-and-drop task boards categorized by To Do, In Progress, and Completed.
-- 🎯 **Habit Tracker**: Daily habit logging with streak counters and consistency tracking.
-- 📔 **Reflective Journal**: Daily reflections, mood tracking, and mindful notes.
-- 🌙 **Dark / Light Mode**: Beautiful theme toggle with sleek visual aesthetics.
-- 💾 **Local Storage Persistence**: Keep your tasks, habits, and notes saved across browser sessions.
+- ⏱️ **Focus Engine (Pomodoro)**: Crisp countdown timer with synthesized Web Audio chimes, mode switching (25m / 5m / 15m), and pin-to-task focus sessions.
+- 📋 **Visual Kanban Board**: Clean 3-column workflow (To Do, In Progress, Completed) with priority indicators, tags, and state progression.
+- 🎯 **7-Day Habit Matrix**: Micro-consistency grid tracker with persistent weekly streak counters.
+- 📔 **Reflective Daily Journal**: End-of-day introspection notes and mood logging with immediate local persistence.
+- 🎨 **Swiss & Kyoto Editorial Themes**: Curated palettes including Kyoto Sumi & Cinnabar, Swiss Modernist Slate, Retro Raw Paper, Monochrome Bauhaus, and Nordic Pine.
+- 🔐 **Account & Local Identity**: Multi-profile management, password reset recovery ("Lupa Password"), and custom quotes/avatars stored strictly on-device in `localStorage`.
 
 ## Tech Stack
 
 - **HTML5 & Vanilla JavaScript** (Modular ES6 architecture)
-- **Tailwind CSS** (CDN)
-- **Vite** (Build tool and dev server)
+- **Tailwind CSS & Custom Studio Typography** (Newsreader Serif + Space Grotesk + Space Mono)
+- **Vite** (Build tool and development server)
 
 ## Getting Started
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/devonchristan23/FocusFlow.git
-   cd FocusFlow
+   git clone https://github.com/ponzfocus/ponzfocus.git
+   cd ponzfocus
    ```
 
 2. **Install dependencies:**
@@ -30,12 +30,12 @@ A mindful daily productivity web application designed to help you stay focused, 
    npm install
    ```
 
-3. **Start the development server:**
+3. **Start local development server:**
    ```bash
    npm run dev
    ```
 
-4. **Build for production:**
+4. **Build production bundle:**
    ```bash
    npm run build
    ```

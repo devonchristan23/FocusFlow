@@ -96,9 +96,9 @@ export class PomodoroTimer {
 
     // Update Browser Document Title when running
     if (this.timerRunning) {
-      document.title = `(${timeStr}) FocusFlow - Daily Productivity`;
+      document.title = `(${timeStr}) ponzfocus — focus session`;
     } else {
-      document.title = `FocusFlow - Daily Productivity Dashboard`;
+      document.title = `ponzfocus — mindful productivity`;
     }
 
     // Progress ring calculation

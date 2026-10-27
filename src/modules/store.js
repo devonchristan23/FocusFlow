@@ -1,11 +1,13 @@
-// Centralized State Management with User Accounts & Isolated Clean User Data
+// Centralized State Management with User Accounts & Isolated Clean User Data for ponzfocus
 
-const USERS_STORAGE_KEY = 'focusflow_registered_users_v2';
-const APP_STATE_KEY = 'focusflow_app_session_v2';
+const USERS_STORAGE_KEY = 'ponzfocus_registered_users_v2';
+const APP_STATE_KEY = 'ponzfocus_app_session_v2';
+const LEGACY_USERS_KEY = 'focusflow_registered_users_v2';
+const LEGACY_APP_STATE_KEY = 'focusflow_app_session_v2';
 
 const createCleanUserData = () => ({
   settings: {
-    theme: 'deep-ocean',
+    theme: 'kyoto-ink',
     pomoMinutes: 25,
     shortBreakMinutes: 5,
     longBreakMinutes: 15,
@@ -38,7 +40,14 @@ class Store {
 
   loadUsers() {
     try {
-      const data = localStorage.getItem(USERS_STORAGE_KEY);
+      let data = localStorage.getItem(USERS_STORAGE_KEY);
+      if (!data) {
+        // Fallback check legacy key if migrating
+        data = localStorage.getItem(LEGACY_USERS_KEY);
+        if (data) {
+          localStorage.setItem(USERS_STORAGE_KEY, data);
+        }
+      }
       if (data) {
         return JSON.parse(data);
       }
@@ -54,7 +63,13 @@ class Store {
 
   loadSession() {
     try {
-      const data = localStorage.getItem(APP_STATE_KEY);
+      let data = localStorage.getItem(APP_STATE_KEY);
+      if (!data) {
+        data = localStorage.getItem(LEGACY_APP_STATE_KEY);
+        if (data) {
+          localStorage.setItem(APP_STATE_KEY, data);
+        }
+      }
       if (data) return JSON.parse(data);
     } catch (e) {}
     return { currentUserEmail: null };
@@ -144,6 +159,23 @@ class Store {
   logout() {
     this.session.currentUserEmail = null;
     this.saveState();
+  }
+
+  resetPassword({ email, newPassword }) {
+    if (!email) {
+      throw new Error('Silakan masukkan alamat email yang terdaftar.');
+    }
+    const user = this.users.find(u => u.email.toLowerCase() === email.toLowerCase());
+    if (!user) {
+      throw new Error('Alamat email tidak terdaftar dalam akun ponzfocus.');
+    }
+    if (!newPassword || newPassword.length < 6) {
+      throw new Error('Password baru minimal harus 6 karakter.');
+    }
+    user.password = newPassword;
+    this.saveUsers();
+    this.notify();
+    return true;
   }
 
   updateUserProfile({ nickname, quote, avatarUrl }) {

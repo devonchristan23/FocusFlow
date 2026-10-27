@@ -1,116 +1,132 @@
-// Calming Color Theme Manager for FocusFlow
+// Disciplined Studio Color & Theme Manager for ponzfocus
+// Inspired by Swiss typography & Japanese wabi-sabi minimalism
 
 export const THEMES = {
-  'deep-ocean': {
-    name: 'Calm Deep Ocean',
-    description: 'Biru keunguan gelap yang menenangkan untuk fokus mendalam.',
+  'kyoto-ink': {
+    name: 'Kyoto Sumi & Cinnabar',
+    description: 'Arang sumi hangat, kertas washi krem, dan aksen stempel cinnabar.',
     colors: {
-      background: '#0b1326',
-      surface: '#0b1326',
-      'surface-container-low': '#131b2e',
-      'surface-container': '#171f33',
-      'surface-container-high': '#222a3d',
-      'surface-container-highest': '#2d3449',
-      primary: '#c0c1ff',
-      'on-primary': '#1000a9',
-      'primary-container': '#8083ff',
-      secondary: '#4edea3',
-      'on-secondary': '#003824',
-      tertiary: '#ffb95f',
-      'on-surface': '#dae2fd',
-      'on-surface-variant': '#c7c4d7',
-      outline: '#908fa0'
+      background: '#111213',
+      surface: '#111213',
+      'surface-container-low': '#161719',
+      'surface-container': '#1c1d20',
+      'surface-container-high': '#24262a',
+      'surface-container-highest': '#2f3136',
+      primary: '#e64528',
+      'on-primary': '#ffffff',
+      'primary-container': '#381611',
+      secondary: '#7eb382',
+      'on-secondary': '#112914',
+      tertiary: '#d9a05b',
+      'on-surface': '#f4f3ed',
+      'on-surface-variant': '#9e9c93',
+      outline: '#69675f',
+      'outline-variant': '#2c2e33'
     }
   },
-  'zen-sage': {
-    name: 'Zen Sage & Forest',
-    description: 'Hijau daun sage yang sejuk dan menyegarkan mata.',
+  'swiss-grid': {
+    name: 'Swiss Modernist Slate',
+    description: 'Batu slate arsitektural, tipografi presisi, dan aksen oranye Zurich.',
     colors: {
-      background: '#0b1a15',
-      surface: '#0b1a15',
-      'surface-container-low': '#112620',
-      'surface-container': '#17332b',
-      'surface-container-high': '#224239',
-      'surface-container-highest': '#2d5247',
-      primary: '#6ffbbe',
-      'on-primary': '#003824',
-      'primary-container': '#005236',
-      secondary: '#a7f3d0',
-      'on-secondary': '#064e3b',
-      tertiary: '#fcd34d',
-      'on-surface': '#e6f7f2',
-      'on-surface-variant': '#b2d8ce',
-      outline: '#82a89e'
+      background: '#121315',
+      surface: '#121315',
+      'surface-container-low': '#17191d',
+      'surface-container': '#1e2126',
+      'surface-container-high': '#262930',
+      'surface-container-highest': '#31353e',
+      primary: '#ff4d00',
+      'on-primary': '#ffffff',
+      'primary-container': '#381605',
+      secondary: '#3ecf8e',
+      'on-secondary': '#052918',
+      tertiary: '#e6b450',
+      'on-surface': '#f2f4f8',
+      'on-surface-variant': '#9ea3ad',
+      outline: '#686d77',
+      'outline-variant': '#2a2d33'
     }
   },
-  'serene-sunset': {
-    name: 'Serene Warm Amber',
-    description: 'Warna hangat senja amber yang lembut dan rileks.',
+  'retro-paper': {
+    name: 'Retro Raw Paper & Ochre',
+    description: 'Tekstur kertas koran antik, tinta kayu, dan aksen terakota hangat.',
     colors: {
-      background: '#1a130f',
-      surface: '#1a130f',
-      'surface-container-low': '#261c16',
-      'surface-container': '#33251e',
-      'surface-container-high': '#423229',
-      'surface-container-highest': '#523f34',
-      primary: '#ffd099',
-      'on-primary': '#472a00',
-      'primary-container': '#ca8100',
-      secondary: '#6ee7b7',
-      'on-secondary': '#064e3b',
-      tertiary: '#f472b6',
-      'on-surface': '#fdeee6',
-      'on-surface-variant': '#e6c7b8',
-      outline: '#a88c7d'
+      background: '#171513',
+      surface: '#171513',
+      'surface-container-low': '#1e1b18',
+      'surface-container': '#25221d',
+      'surface-container-high': '#302b25',
+      'surface-container-highest': '#3d372f',
+      primary: '#c86432',
+      'on-primary': '#ffffff',
+      'primary-container': '#361b0f',
+      secondary: '#8fa876',
+      'on-secondary': '#1b2611',
+      tertiary: '#d4a373',
+      'on-surface': '#f5efe4',
+      'on-surface-variant': '#a89f92',
+      outline: '#70685c',
+      'outline-variant': '#342f27'
     }
   },
-  'nordic-twilight': {
-    name: 'Nordic Twilight Lavender',
-    description: 'Sentuhan lavender & biru fajar musim dingin.',
+  'sumi-charcoal': {
+    name: 'Monochrome Bauhaus Dark',
+    description: 'Monokromatik kontras tinggi murni dengan titik merah sinyal tajam.',
     colors: {
-      background: '#12111d',
-      surface: '#12111d',
-      'surface-container-low': '#1c1a2c',
-      'surface-container': '#25233b',
-      'surface-container-high': '#32304d',
-      'surface-container-highest': '#413f61',
-      primary: '#d8b4fe',
-      'on-primary': '#3b0764',
-      'primary-container': '#9333ea',
-      secondary: '#38bdf8',
-      'on-secondary': '#0c4a6e',
-      tertiary: '#f43f5e',
-      'on-surface': '#f3e8ff',
-      'on-surface-variant': '#d8ccf1',
-      outline: '#978bb3'
+      background: '#0d0d0e',
+      surface: '#0d0d0e',
+      'surface-container-low': '#141416',
+      'surface-container': '#1a1a1d',
+      'surface-container-high': '#232428',
+      'surface-container-highest': '#2e2f34',
+      primary: '#d83a27',
+      'on-primary': '#ffffff',
+      'primary-container': '#2e120f',
+      secondary: '#9ca3af',
+      'on-secondary': '#111827',
+      tertiary: '#d1d5db',
+      'on-surface': '#fafafa',
+      'on-surface-variant': '#a1a1aa',
+      outline: '#71717a',
+      'outline-variant': '#27272a'
     }
   },
-  'soft-minimal': {
-    name: 'Soft Minimal Teal',
-    description: 'Kontras lembut teal malam dengan kejelasan tinggi.',
+  'nordic-moss': {
+    name: 'Nordic Pine & Stone',
+    description: 'Hutan pinus Skandinavia yang tenang dengan aksen bata Nordik.',
     colors: {
-      background: '#0d1821',
-      surface: '#0d1821',
-      'surface-container-low': '#172734',
-      'surface-container': '#203445',
-      'surface-container-high': '#2c4459',
-      'surface-container-highest': '#3a566f',
-      primary: '#99f6e4',
-      'on-primary': '#115e59',
-      'primary-container': '#0d9488',
-      secondary: '#38bdf8',
-      'on-secondary': '#0c4a6e',
-      tertiary: '#fbbf24',
-      'on-surface': '#f0fdfa',
-      'on-surface-variant': '#ccfbf1',
-      outline: '#789999'
+      background: '#101512',
+      surface: '#101512',
+      'surface-container-low': '#161c18',
+      'surface-container': '#1d2520',
+      'surface-container-high': '#26312a',
+      'surface-container-highest': '#313f36',
+      primary: '#c25732',
+      'on-primary': '#ffffff',
+      'primary-container': '#2e160e',
+      secondary: '#7eb897',
+      'on-secondary': '#0f291c',
+      tertiary: '#d9b875',
+      'on-surface': '#eef5f0',
+      'on-surface-variant': '#9fb0a4',
+      outline: '#67786c',
+      'outline-variant': '#26332a'
     }
   }
 };
 
+// Legacy key aliases for seamless migration
+const THEME_ALIASES = {
+  'deep-ocean': 'kyoto-ink',
+  'zen-sage': 'nordic-moss',
+  'serene-sunset': 'retro-paper',
+  'nordic-twilight': 'swiss-grid',
+  'soft-minimal': 'sumi-charcoal'
+};
+
 export class ThemeManager {
   static applyTheme(themeKey) {
-    const theme = THEMES[themeKey] || THEMES['deep-ocean'];
+    const resolvedKey = THEME_ALIASES[themeKey] || themeKey;
+    const theme = THEMES[resolvedKey] || THEMES['kyoto-ink'];
     const root = document.documentElement;
 
     Object.entries(theme.colors).forEach(([key, val]) => {

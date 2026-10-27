@@ -3,335 +3,438 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>FocusFlow - Daily Productivity Web App</title>
-  <meta content="FocusFlow - Mindful daily productivity web application with Pomodoro timer, Kanban tasks, Habit tracker, and Journal." name="description"/>
+  <title>ponzfocus — Daily Mindful Productivity</title>
+  <meta content="ponzfocus — Independent Swiss-Japanese minimalist productivity workspace with Pomodoro Focus Engine, Kanban Tasks, Habit Matrix, and Reflective Journal." name="description"/>
   
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
   
-  <style>
-    @layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } }
-    ::-webkit-scrollbar { display: none; }
-  </style>
-  
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
-          "colors": {
-            "surface-container-lowest": "#060e20",
-            "outline": "#908fa0",
-            "surface-dim": "#0b1326",
-            "on-surface-variant": "#c7c4d7",
-            "on-tertiary-fixed": "#2a1700",
-            "surface-variant": "#2d3449",
-            "secondary-container": "#00a572",
-            "tertiary-fixed-dim": "#ffb95f",
-            "on-tertiary": "#472a00",
-            "error-container": "#93000a",
-            "on-secondary-fixed": "#002113",
-            "on-secondary-fixed-variant": "#005236",
-            "background": "#0b1326",
-            "surface": "#0b1326",
-            "on-primary-fixed-variant": "#2f2ebe",
-            "on-error-container": "#ffdad6",
-            "error": "#ffb4ab",
-            "on-background": "#dae2fd",
-            "on-primary-container": "#0d0096",
-            "secondary-fixed": "#6ffbbe",
-            "on-primary-fixed": "#07006c",
-            "on-primary": "#1000a9",
-            "inverse-on-surface": "#283044",
-            "inverse-surface": "#dae2fd",
-            "tertiary-fixed": "#ffddb8",
-            "on-secondary": "#003824",
-            "outline-variant": "#464554",
-            "surface-container-low": "#131b2e",
-            "on-tertiary-fixed-variant": "#653e00",
-            "primary-fixed": "#e1e0ff",
-            "secondary": "#4edea3",
-            "tertiary": "#ffb95f",
-            "secondary-fixed-dim": "#4edea3",
-            "primary-fixed-dim": "#c0c1ff",
-            "surface-container-highest": "#2d3449",
-            "surface-container-high": "#222a3d",
-            "tertiary-container": "#ca8100",
-            "on-error": "#690005",
-            "surface-tint": "#c0c1ff",
-            "surface-container": "#171f33",
-            "on-secondary-container": "#00311f",
-            "surface-bright": "#31394d",
-            "on-surface": "#dae2fd",
-            "inverse-primary": "#494bd6",
-            "on-tertiary-container": "#3e2400",
-            "primary": "#c0c1ff",
-            "primary-container": "#8083ff"
+          colors: {
+            "surface-container-lowest": "var(--color-background, #111213)",
+            "outline": "var(--color-outline, #69675f)",
+            "surface-dim": "var(--color-background, #111213)",
+            "on-surface-variant": "var(--color-on-surface-variant, #9e9c93)",
+            "surface-variant": "var(--color-surface-container-highest, #2f3136)",
+            "secondary-container": "#1e2b20",
+            "background": "var(--color-background, #111213)",
+            "surface": "var(--color-surface, #111213)",
+            "error-container": "#361616",
+            "error": "#e25555",
+            "on-background": "var(--color-on-surface, #f4f3ed)",
+            "on-primary-container": "var(--color-on-surface, #f4f3ed)",
+            "on-primary": "var(--color-on-primary, #ffffff)",
+            "primary": "var(--color-primary, #e64528)",
+            "primary-container": "var(--color-primary-container, #381611)",
+            "primary-fixed": "var(--color-primary, #e64528)",
+            "secondary": "var(--color-secondary, #7eb382)",
+            "on-secondary": "#112914",
+            "tertiary": "var(--color-tertiary, #d9a05b)",
+            "outline-variant": "var(--color-outline-variant, #2c2e33)",
+            "surface-container-low": "var(--color-surface-container-low, #161719)",
+            "surface-container": "var(--color-surface-container, #1c1d20)",
+            "surface-container-high": "var(--color-surface-container-high, #24262a)",
+            "surface-container-highest": "var(--color-surface-container-highest, #2f3136)",
+            "surface-bright": "var(--color-surface-container-highest, #2f3136)",
+            "on-surface": "var(--color-on-surface, #f4f3ed)"
           },
-          "borderRadius": {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
-            "xl": "0.75rem",
-            "full": "9999px"
+          fontFamily: {
+            "display": [ "Newsreader", "Georgia", "serif" ],
+            "headline-lg": [ "Newsreader", "Georgia", "serif" ],
+            "headline-md": [ "Newsreader", "Georgia", "serif" ],
+            "headline-sm": [ "Space Grotesk", "sans-serif" ],
+            "body-lg": [ "Space Grotesk", "sans-serif" ],
+            "body-md": [ "Space Grotesk", "sans-serif" ],
+            "body-sm": [ "Space Grotesk", "sans-serif" ],
+            "label-md": [ "Space Mono", "monospace" ],
+            "label-sm": [ "Space Mono", "monospace" ]
           },
-          "spacing": {
-            "space-md": "1rem",
-            "gutter": "1.5rem",
-            "space-lg": "1.5rem",
-            "space-xl": "2.5rem",
-            "space-sm": "0.5rem",
-            "gutter-mobile": "1rem",
+          spacing: {
             "space-xs": "0.25rem",
-            "margin-mobile": "1rem",
-            "margin": "2rem"
-          },
-          "fontFamily": {
-            "body-lg": [ "Inter" ],
-            "headline-sm": [ "Plus Jakarta Sans" ],
-            "body-sm": [ "Inter" ],
-            "display": [ "Plus Jakarta Sans" ],
-            "label-md": [ "Inter" ],
-            "headline-md": [ "Plus Jakarta Sans" ],
-            "headline-lg": [ "Plus Jakarta Sans" ],
-            "body-md": [ "Inter" ],
-            "label-sm": [ "Inter" ]
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem"
           }
         }
       }
     };
   </script>
-  <script type="module" crossorigin src="/assets/index-BXH3uB0W.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-uktBbOlR.css">
+  <script type="module" crossorigin src="/assets/index-ByIhv12B.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BMlpbBi4.css">
 </head>
-<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen">
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen selection:bg-primary selection:text-on-primary">
 
   <!-- ==================== LANDING PAGE (Unauthenticated View) ==================== -->
-  <div class="flex flex-col min-h-screen bg-surface" id="view-landing">
-    <!-- Public Navbar -->
-    <header class="w-full max-w-7xl mx-auto flex items-center justify-between px-space-lg py-space-md">
-      <div class="flex items-center gap-space-sm">
-        <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center shadow-sm">
-          <span class="material-symbols-outlined text-on-primary-container text-[22px]">filter_center_focus</span>
+  <div class="flex flex-col min-h-screen bg-surface swiss-grid-bg" id="view-landing">
+    <!-- Public Swiss Architectural Masthead -->
+    <header class="w-full max-w-7xl mx-auto flex items-center justify-between px-space-lg py-5 border-b border-surface-container-high/40">
+      <div class="flex items-center gap-4">
+        <a class="flex items-center gap-2 group" href="#">
+          <div class="w-7 h-7 bg-primary flex items-center justify-center text-on-primary font-mono text-xs font-bold tracking-tight">
+            P
+          </div>
+          <span class="font-headline-sm text-xl text-on-surface tracking-tight font-bold lowercase">ponzfocus<span class="text-primary">.</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-2 text-outline font-label-sm text-[11px] uppercase tracking-wider pl-4 border-l border-surface-container-high/60">
+          <span>ED. 2026 // CH-JP ARCHITECTURE</span>
+          <span class="text-outline-variant">•</span>
+          <span class="text-secondary flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            LOCAL PERSISTENCE
+          </span>
         </div>
-        <span class="font-headline-md text-headline-md text-on-surface tracking-tight font-bold">FocusFlow</span>
       </div>
-      <!-- Top Right Auth Buttons (Sign In / Sign Up) -->
-      <div class="flex items-center gap-space-sm">
-        <button class="px-space-md py-2 rounded-xl bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all font-label-md font-semibold" id="landing-sign-in-btn" type="button">
+
+      <!-- Masthead Auth Buttons -->
+      <div class="flex items-center gap-3">
+        <button class="px-4 py-2 text-on-surface-variant hover:text-on-surface font-label-sm text-xs tracking-wider uppercase transition-colors" id="landing-sign-in-btn" type="button">
           Sign In
         </button>
-        <button class="px-space-md py-2 rounded-xl bg-primary text-on-primary hover:bg-primary-fixed transition-all font-label-md font-semibold shadow-sm" id="landing-sign-up-btn" type="button">
-          Sign Up
+        <button class="px-5 py-2.5 bg-primary text-on-primary hover:opacity-95 font-label-sm text-xs tracking-wider uppercase transition-all shadow-sm" id="landing-sign-up-btn" type="button">
+          Buka Ruang Fokus
         </button>
       </div>
     </header>
 
-    <!-- Hero Section -->
-    <main class="flex-1 max-w-7xl mx-auto px-space-lg py-space-xl flex flex-col items-center text-center gap-space-xl">
-      <div class="inline-flex items-center gap-2 px-space-md py-1.5 rounded-full bg-surface-container-high text-secondary font-label-sm uppercase tracking-wider">
-        <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-        <span>Mindful Productivity App • Offline-First Zero Server Drift</span>
+    <!-- Main Asymmetric Hero Section -->
+    <main class="flex-1 max-w-7xl mx-auto px-space-lg py-12 lg:py-16 flex flex-col gap-14">
+      
+      <!-- Asymmetric Editorial Grid (Left: Manifesto & CTA, Right: Pristine Studio Display) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <!-- Left Editorial Block (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col items-start text-left gap-6">
+          <div class="inline-flex items-center gap-2.5 px-3 py-1 bg-surface-container-low border border-surface-container-high text-outline font-label-sm text-xs">
+            <span class="text-primary font-bold">01 //</span>
+            <span class="uppercase tracking-widest text-[11px]">KONSEPSI PRODUKTIVITAS MINIMALIS</span>
+          </div>
+
+          <h1 class="font-headline-lg text-4xl sm:text-6xl text-on-surface font-normal leading-[1.08] tracking-tight">
+            Kejernihan pikiran.<br/>
+            <span class="italic text-primary font-normal">Bukan sekadar mencoret daftar tugas.</span>
+          </h1>
+
+          <p class="font-body-lg text-base sm:text-lg text-on-surface-variant leading-relaxed max-w-2xl font-light">
+            ponzfocus adalah instrumen kerja harian yang dirancang layaknya studio desain independen Swiss—tenang, tanpa distraksi, dan sepenuhnya berjalan di peramban Anda tanpa ketergantungan server luar.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <button class="px-7 py-3.5 bg-primary text-on-primary hover:bg-opacity-90 transition-all font-label-sm text-xs tracking-wider uppercase flex items-center gap-2" id="hero-cta-btn" type="button">
+              <span>Mulai Sesi Fokus Anda</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+            <a class="px-5 py-3.5 border border-surface-container-high hover:border-outline text-on-surface font-label-sm text-xs tracking-wider uppercase transition-colors" href="#manifesto-features">
+              Lihat Spesifikasi Fitur ↓
+            </a>
+          </div>
+
+          <!-- Micro Taxonomy & Spec Strip -->
+          <div class="pt-4 border-t border-surface-container-high/40 w-full grid grid-cols-3 gap-4 text-outline font-label-sm text-[11px]">
+            <div>
+              <span class="block text-on-surface font-bold">ZERO DRIFT</span>
+              <span>Penyimpanan lokal 100% aman</span>
+            </div>
+            <div>
+              <span class="block text-on-surface font-bold">SYNTH AMBIENCE</span>
+              <span>Web Audio synthesizer murni</span>
+            </div>
+            <div>
+              <span class="block text-on-surface font-bold">SWISS GRID</span>
+              <span>Hierarki visual tanpa distraksi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual Showcase (5 cols): Razor-Sharp Workstation Presentation -->
+        <div class="lg:col-span-5 flex flex-col gap-2">
+          <div class="relative bg-surface-container-low border border-surface-container-high p-2 shadow-2xl group overflow-hidden">
+            <!-- Studio Editorial Workstation Asset -->
+            <img 
+              alt="ponzfocus Workstation Interface Architecture" 
+              class="w-full h-auto object-cover border border-surface-container-high/60 transition-transform duration-700 group-hover:scale-[1.01]" 
+              src="/ponzfocus_editorial.jpg"
+              loading="eager"
+            />
+            <div class="absolute top-4 right-4 px-2.5 py-1 bg-surface/90 border border-surface-container-high text-on-surface font-label-sm text-[10px] uppercase tracking-widest backdrop-blur-sm">
+              LIVE PREVIEW • 4K RETINA
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-outline font-label-sm text-[10px] uppercase tracking-wider px-1">
+            <span>FIG. 01 — PONZFOCUS WORKSTATION INTERFACE</span>
+            <span>CH-8001 / JP-100</span>
+          </div>
+        </div>
+
       </div>
 
-      <h1 class="font-display text-[48px] sm:text-[64px] text-on-surface font-bold tracking-tight max-w-4xl leading-tight">
-        Fokus Lebih Dalam.<br/>
-        <span class="text-primary">Kelola Hari Tanpa Beban Kognitif.</span>
-      </h1>
+      <!-- Catalogue Matrix: 4 Distinctive Architectural Columns -->
+      <section class="border-t border-surface-container-high/50 pt-10" id="manifesto-features">
+        <div class="flex items-center justify-between mb-8">
+          <span class="font-label-sm text-xs uppercase tracking-widest text-outline">ARSITEKTUR MODUL INSTRUMEN</span>
+          <span class="font-label-sm text-xs text-primary">04 MODUL TERPADU</span>
+        </div>
 
-      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-        Ruang kerja minimalis modern yang mengintegrasikan Pomodoro Timer, Kanban Task Manager, 7-Day Habit Matrix, dan Daily Journal dalam satu aplikasi terpadu.
-      </p>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-0 border border-surface-container-high/50 divide-y md:divide-y-0 md:divide-x divide-surface-container-high/50 bg-surface-container-low/40">
+          
+          <!-- Modul 01 -->
+          <div class="p-6 flex flex-col gap-3 studio-card">
+            <span class="index-stamp text-primary">01 // FOCUS</span>
+            <h3 class="font-headline-sm text-lg text-on-surface font-semibold">Focus Engine</h3>
+            <p class="font-body-sm text-sm text-on-surface-variant font-light leading-relaxed">
+              Sesi Pomodoro dengan penanda Web Audio sintetis murni. Tanpa jeda server, pin tugas aktif, dan visual timer lingkaran presisi.
+            </p>
+          </div>
 
-      <div class="flex flex-wrap justify-center gap-space-md pt-space-xs">
-        <button class="px-space-xl py-3 rounded-2xl bg-primary text-on-primary hover:bg-primary-fixed transition-all font-headline-sm font-semibold shadow-lg" id="hero-cta-btn" type="button">
-          Mulai Sekarang ✨
+          <!-- Modul 02 -->
+          <div class="p-6 flex flex-col gap-3 studio-card">
+            <span class="index-stamp text-on-surface">02 // TASKS</span>
+            <h3 class="font-headline-sm text-lg text-on-surface font-semibold">Visual Kanban</h3>
+            <p class="font-body-sm text-sm text-on-surface-variant font-light leading-relaxed">
+              Pengorganisasian tugas 3-kolom terstruktur (To Do, In Progress, Done) dengan label prioritas tajam dan estimasi waktu.
+            </p>
+          </div>
+
+          <!-- Modul 03 -->
+          <div class="p-6 flex flex-col gap-3 studio-card">
+            <span class="index-stamp text-secondary">03 // HABITS</span>
+            <h3 class="font-headline-sm text-lg text-on-surface font-semibold">Habit Matrix</h3>
+            <p class="font-body-sm text-sm text-on-surface-variant font-light leading-relaxed">
+              Matriks konsistensi 7-hari untuk membangun kebiasaan harian secara terukur dan berkelanjutan tanpa beban kognitif.
+            </p>
+          </div>
+
+          <!-- Modul 04 -->
+          <div class="p-6 flex flex-col gap-3 studio-card">
+            <span class="index-stamp text-tertiary">04 // JOURNAL</span>
+            <h3 class="font-headline-sm text-lg text-on-surface font-semibold">Daily Reflection</h3>
+            <p class="font-body-sm text-sm text-on-surface-variant font-light leading-relaxed">
+              Arsip refleksi malam dan pencatat suasana hati (mood) yang tersinkron otomatis langsung di penyimpanan lokal browser.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Bottom Manifesto Strip -->
+      <div class="p-8 border border-surface-container-high/60 bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex flex-col gap-1 text-left">
+          <span class="font-label-sm text-xs text-primary uppercase tracking-widest font-bold">PRIVASI &amp; KEDAULATAN DATA</span>
+          <h4 class="font-headline-sm text-xl text-on-surface font-semibold">Bekerja tanpa pelacakan. Seluruh data tetap milik Anda.</h4>
+          <p class="font-body-sm text-sm text-on-surface-variant font-light max-w-2xl">
+            Tidak ada basis data eksternal, tidak ada analitik pihak ketiga. Seluruh riwayat sesi dan catatan tersimpan aman dalam localStorage peramban Anda.
+          </p>
+        </div>
+        <button class="px-6 py-3 bg-on-surface text-surface hover:bg-white font-label-sm text-xs tracking-wider uppercase whitespace-nowrap transition-colors" id="hero-cta-btn-2" type="button">
+          Mulai Sekarang →
         </button>
       </div>
 
-      <!-- App Preview Image -->
-      <div class="w-full max-w-5xl mt-space-md rounded-2xl overflow-hidden border border-surface-container-high/60 shadow-2xl relative group">
-        <img alt="FocusFlow Dashboard Preview" class="w-full h-auto object-cover" src="/stitch_screenshot.png"/>
-        <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
-      </div>
-
-      <!-- Features Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-space-lg w-full max-w-5xl mt-space-xl text-left">
-        <div class="p-space-lg rounded-2xl bg-surface-container-low border border-surface-container-high/40 flex flex-col gap-space-xs">
-          <span class="material-symbols-outlined text-primary text-[28px]">timer</span>
-          <h3 class="font-headline-sm text-headline-sm text-on-surface">Focus Engine</h3>
-          <p class="font-body-sm text-on-surface-variant">Sesi Pomodoro terintegrasi dengan penanda audio Web Audio synth.</p>
-        </div>
-        <div class="p-space-lg rounded-2xl bg-surface-container-low border border-surface-container-high/40 flex flex-col gap-space-xs">
-          <span class="material-symbols-outlined text-secondary text-[28px]">view_kanban</span>
-          <h3 class="font-headline-sm text-headline-sm text-on-surface">Visual Kanban</h3>
-          <p class="font-body-sm text-on-surface-variant">Kelola tugas dengan tag, prioritas, dan pin ke sesi fokus.</p>
-        </div>
-        <div class="p-space-lg rounded-2xl bg-surface-container-low border border-surface-container-high/40 flex flex-col gap-space-xs">
-          <span class="material-symbols-outlined text-tertiary text-[28px]">calendar_view_week</span>
-          <h3 class="font-headline-sm text-headline-sm text-on-surface">Habit Matrix</h3>
-          <p class="font-body-sm text-on-surface-variant">Pelacak 7-hari harian untuk membangun konsistensi berturut-turut.</p>
-        </div>
-        <div class="p-space-lg rounded-2xl bg-surface-container-low border border-surface-container-high/40 flex flex-col gap-space-xs">
-          <span class="material-symbols-outlined text-on-surface text-[28px]">edit_note</span>
-          <h3 class="font-headline-sm text-headline-sm text-on-surface">Daily Journal</h3>
-          <p class="font-body-sm text-on-surface-variant">Refleksi malam dan pelacak suasana hati yang tersimpan otomatis.</p>
-        </div>
-      </div>
     </main>
 
-    <footer class="w-full text-center py-space-lg text-outline font-label-sm border-t border-surface-container-high/30 mt-space-xl">
-      FocusFlow App • Mindful Productivity Web Application
+    <!-- Public Swiss Minimal Footer -->
+    <footer class="w-full border-t border-surface-container-high/40 py-8 px-space-lg text-center text-outline font-label-sm text-xs flex flex-col sm:flex-row items-center justify-between max-w-7xl mx-auto gap-4">
+      <div>
+        <span class="text-on-surface font-semibold">ponzfocus</span> — Independent Studio Productivity Instrument
+      </div>
+      <div class="flex items-center gap-4">
+        <span>ZÜRICH // TOKYO</span>
+        <span>•</span>
+        <a class="hover:text-on-surface underline underline-offset-4" href="https://github.com/ponzfocus/ponzfocus" target="_blank">GitHub Repository</a>
+      </div>
     </footer>
   </div>
 
-  <!-- ==================== SIGN IN / SIGN UP MODAL ==================== -->
-  <div class="fixed inset-0 bg-background/90 backdrop-blur-xl z-50 hidden items-center justify-center p-space-md" id="view-login">
-    <div class="w-full max-w-md bg-surface-container-low rounded-2xl border border-surface-container-high p-space-xl flex flex-col gap-space-lg shadow-2xl relative">
-      <button class="absolute top-4 right-4 p-1.5 rounded-lg text-outline hover:text-on-surface" id="close-auth-modal-btn" type="button">
+  <!-- ==================== AUTH MODAL (SIGN IN / SIGN UP / FORGOT PASSWORD) ==================== -->
+  <div class="fixed inset-0 bg-background/90 backdrop-blur-md z-50 hidden items-center justify-center p-space-md" id="view-login">
+    <div class="w-full max-w-md bg-surface-container-low border border-surface-container-high p-8 flex flex-col gap-6 shadow-2xl relative">
+      <button class="absolute top-4 right-4 p-2 text-outline hover:text-on-surface transition-colors" id="close-auth-modal-btn" title="Tutup" type="button">
         <span class="material-symbols-outlined text-[20px]">close</span>
       </button>
 
-      <!-- Modal Header Logo -->
-      <div class="flex flex-col items-center text-center gap-space-xs">
-        <div class="w-12 h-12 rounded-2xl bg-primary-container flex items-center justify-center shadow-sm mb-1">
-          <span class="material-symbols-outlined text-on-primary-container text-[26px]">filter_center_focus</span>
+      <!-- Modal Brand Header -->
+      <div class="flex flex-col items-start gap-1">
+        <div class="flex items-center gap-2 mb-1">
+          <div class="w-6 h-6 bg-primary flex items-center justify-center text-on-primary font-mono text-xs font-bold">
+            P
+          </div>
+          <span class="font-label-sm text-xs uppercase tracking-widest text-outline">ponzfocus identity</span>
         </div>
-        <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold" id="auth-modal-title">Sign In ke FocusFlow</h2>
-        <p class="font-body-md text-on-surface-variant" id="auth-modal-subtitle">Masuk untuk melanjutkan sesi produktivitas kamu.</p>
+        <h2 class="font-headline-md text-2xl text-on-surface font-normal" id="auth-modal-title">Sign In ke ponzfocus</h2>
+        <p class="font-body-sm text-sm text-on-surface-variant font-light" id="auth-modal-subtitle">Masuk untuk melanjutkan sesi produktivitas terstruktur Anda.</p>
       </div>
 
-      <!-- Auth Tabs Switcher -->
-      <div class="grid grid-cols-2 p-1 rounded-xl bg-surface-container-highest/60 font-label-md text-label-md">
-        <button class="py-2 rounded-lg bg-primary text-on-primary font-semibold transition-all shadow-xs" id="auth-tab-signin" type="button">
+      <!-- Auth Tabs Switcher (Visible in Sign In & Sign Up) -->
+      <div class="grid grid-cols-2 p-1 bg-surface-container border border-surface-container-high font-label-sm text-xs tracking-wider uppercase" id="auth-tabs-row">
+        <button class="py-2 bg-primary text-on-primary font-semibold transition-all" id="auth-tab-signin" type="button">
           Sign In
         </button>
-        <button class="py-2 rounded-lg text-on-surface-variant hover:text-on-surface transition-all" id="auth-tab-signup" type="button">
+        <button class="py-2 text-on-surface-variant hover:text-on-surface transition-all" id="auth-tab-signup" type="button">
           Sign Up
         </button>
       </div>
 
-      <!-- Auth Error Alert Badge -->
-      <div class="hidden p-3 rounded-xl bg-error-container/30 border border-error/30 text-error font-body-sm text-center" id="auth-error-alert"></div>
+      <!-- Feedback Alerts -->
+      <div class="hidden p-3 bg-error-container border border-error/50 text-error font-mono text-xs" id="auth-error-alert"></div>
+      <div class="hidden p-3 bg-secondary-container border border-secondary/50 text-secondary font-mono text-xs" id="auth-success-alert"></div>
 
       <!-- SIGN IN FORM -->
-      <form class="flex flex-col gap-space-md" id="signin-form">
-        <div class="flex flex-col gap-1">
-          <label class="font-label-sm text-outline">Email</label>
-          <input class="bg-surface-container-high text-on-surface p-3 rounded-xl focus:outline-none font-body-md" id="signin-email-input" placeholder="alex@flow.dev" required="" type="email"/>
+      <form class="flex flex-col gap-4" id="signin-form">
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Email Pengguna</label>
+          <input class="bg-surface-container border border-surface-container-high text-on-surface p-3 font-body-sm focus:outline-none" id="signin-email-input" placeholder="alex@ponzfocus.studio" required="" type="email"/>
         </div>
 
-        <div class="flex flex-col gap-1">
-          <label class="font-label-sm text-outline">Password</label>
-          <input class="bg-surface-container-high text-on-surface p-3 rounded-xl focus:outline-none font-body-md" id="signin-password-input" placeholder="••••••••" required="" type="password"/>
+        <div class="flex flex-col gap-1.5">
+          <div class="flex items-center justify-between">
+            <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Password</label>
+            <button class="font-label-sm text-xs text-primary hover:underline" id="to-forgot-password-btn" type="button">
+              Lupa password?
+            </button>
+          </div>
+          <input class="bg-surface-container border border-surface-container-high text-on-surface p-3 font-body-sm focus:outline-none" id="signin-password-input" placeholder="••••••••" required="" type="password"/>
         </div>
 
-        <button class="w-full py-3 rounded-xl bg-primary text-on-primary font-headline-sm font-semibold hover:bg-primary-fixed transition-all shadow-md mt-2" type="submit">
-          Sign In
+        <button class="w-full py-3 bg-primary text-on-primary font-label-sm text-xs tracking-wider uppercase hover:opacity-95 transition-all mt-2" type="submit">
+          Masuk ke ponzfocus
         </button>
       </form>
 
       <!-- SIGN UP FORM -->
-      <form class="hidden flex-col gap-space-md" id="signup-form">
-        <div class="flex flex-col gap-1">
-          <label class="font-label-sm text-outline">Nama Lengkap</label>
-          <input class="bg-surface-container-high text-on-surface p-3 rounded-xl focus:outline-none font-body-md" id="signup-name-input" placeholder="Contoh: Alex Pratama" required="" type="text"/>
+      <form class="hidden flex-col gap-4" id="signup-form">
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Nama Lengkap</label>
+          <input class="bg-surface-container border border-surface-container-high text-on-surface p-3 font-body-sm focus:outline-none" id="signup-name-input" placeholder="Contoh: Alex Pratama" required="" type="text"/>
         </div>
 
-        <div class="flex flex-col gap-1">
-          <label class="font-label-sm text-outline">Email</label>
-          <input class="bg-surface-container-high text-on-surface p-3 rounded-xl focus:outline-none font-body-md" id="signup-email-input" placeholder="alex@flow.dev" required="" type="email"/>
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Email Pengguna</label>
+          <input class="bg-surface-container border border-surface-container-high text-on-surface p-3 font-body-sm focus:outline-none" id="signup-email-input" placeholder="alex@ponzfocus.studio" required="" type="email"/>
         </div>
 
-        <div class="flex flex-col gap-1">
-          <label class="font-label-sm text-outline">Password</label>
-          <input class="bg-surface-container-high text-on-surface p-3 rounded-xl focus:outline-none font-body-md" id="signup-password-input" placeholder="Buat password aman..." required="" type="password"/>
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Password Baru (min. 6 karakter)</label>
+          <input class="bg-surface-container border border-surface-container-high text-on-surface p-3 font-body-sm focus:outline-none" id="signup-password-input" placeholder="••••••••" required="" type="password"/>
         </div>
 
-        <button class="w-full py-3 rounded-xl bg-primary text-on-primary font-headline-sm font-semibold hover:bg-primary-fixed transition-all shadow-md mt-2" type="submit">
-          Daftar Sekarang (Sign Up)
+        <button class="w-full py-3 bg-primary text-on-primary font-label-sm text-xs tracking-wider uppercase hover:opacity-95 transition-all mt-2" type="submit">
+          Registrasi Akun Baru
         </button>
       </form>
+
+      <!-- FORGOT PASSWORD FORM (FITUR LUPA PASSWORD) -->
+      <form class="hidden flex-col gap-4" id="forgot-form">
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Email Akun Terdaftar</label>
+          <input class="bg-surface-container border border-surface-container-high text-on-surface p-3 font-body-sm focus:outline-none" id="forgot-email-input" placeholder="Masukkan email akun ponzfocus..." required="" type="email"/>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Password Baru</label>
+          <input class="bg-surface-container border border-surface-container-high text-on-surface p-3 font-body-sm focus:outline-none" id="forgot-password-input" placeholder="Minimal 6 karakter..." required="" type="password"/>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Konfirmasi Password Baru</label>
+          <input class="bg-surface-container border border-surface-container-high text-on-surface p-3 font-body-sm focus:outline-none" id="forgot-confirm-input" placeholder="Ulangi password baru..." required="" type="password"/>
+        </div>
+
+        <button class="w-full py-3 bg-primary text-on-primary font-label-sm text-xs tracking-wider uppercase hover:opacity-95 transition-all mt-2" type="submit">
+          Perbarui Password
+        </button>
+
+        <button class="w-full py-2.5 border border-surface-container-high text-outline hover:text-on-surface font-label-sm text-xs tracking-wider uppercase transition-colors" id="to-signin-from-forgot-btn" type="button">
+          ← Kembali ke Sign In
+        </button>
+      </form>
+
     </div>
   </div>
 
   <!-- ==================== DASHBOARD SHELL (Authenticated View) ==================== -->
   <div class="hidden" id="app-shell">
-    <!-- Left Navigation Sidebar / Taskbar -->
-    <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low/90 backdrop-blur-xl z-50 flex flex-col justify-between p-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-r border-surface-container-high/40">
-      <div class="flex flex-col gap-space-lg">
-        <div class="flex items-center gap-space-sm px-space-sm pt-space-xs">
-          <div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center">
-            <span class="material-symbols-outlined text-on-primary-container text-[20px]">filter_center_focus</span>
+    <!-- Left Swiss Architectural Sidebar -->
+    <aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low border-r border-surface-container-high/50 z-50 flex flex-col justify-between p-5">
+      <div class="flex flex-col gap-6">
+        <!-- Brand Mark -->
+        <div class="flex items-center gap-3 pt-1">
+          <div class="w-7 h-7 bg-primary flex items-center justify-center text-on-primary font-mono text-xs font-bold tracking-tight">
+            P
           </div>
           <div class="flex flex-col">
-            <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">FocusFlow</span>
-            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider mt-1">Mindful Productivity</span>
+            <span class="font-headline-sm text-lg text-on-surface tracking-tight font-bold lowercase">ponzfocus<span class="text-primary">.</span></span>
+            <span class="font-label-sm text-[10px] text-outline uppercase tracking-widest">STUDIO VER. 1.0</span>
           </div>
         </div>
 
-        <!-- Quick Stats Widget in Sidebar -->
-        <div class="p-space-sm rounded-xl bg-surface-container/60 backdrop-blur-md flex flex-col gap-space-xs border border-surface-container-high/30">
-          <div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
-            <span>TODAY'S STATS</span>
-            <span class="material-symbols-outlined text-[14px] text-secondary">bolt</span>
+        <!-- Metric Widget in Sidebar -->
+        <div class="p-3 bg-surface-container border border-surface-container-high/60 flex flex-col gap-2">
+          <div class="flex items-center justify-between font-label-sm text-[11px] text-outline">
+            <span>TODAY'S DISCIPLINE</span>
+            <span class="material-symbols-outlined text-[14px] text-secondary">adjust</span>
           </div>
           <div class="flex items-center justify-between pt-1">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Focus Session</span>
-            <span class="font-label-md text-label-md text-on-surface font-semibold" id="sidebar-focus-time">2h 45m</span>
+            <span class="font-body-sm text-xs text-on-surface-variant font-light">Focus Duration</span>
+            <span class="font-mono text-xs text-on-surface font-semibold" id="sidebar-focus-time">2h 45m</span>
           </div>
           <div class="flex items-center justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Habits Done</span>
-            <span class="font-label-md text-label-md text-secondary font-semibold" id="sidebar-habits-stat">4/6</span>
+            <span class="font-body-sm text-xs text-on-surface-variant font-light">Habits Done</span>
+            <span class="font-mono text-xs text-secondary font-semibold" id="sidebar-habits-stat">4/6</span>
           </div>
-          <div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden mt-1">
-            <div class="bg-secondary h-full rounded-full" id="sidebar-habits-bar" style="width: 66.6%"></div>
+          <div class="w-full bg-surface-container-highest h-1 overflow-hidden mt-1">
+            <div class="bg-secondary h-full transition-all duration-300" id="sidebar-habits-bar" style="width: 66.6%"></div>
           </div>
         </div>
 
-        <!-- Navigation Links -->
-        <nav class="flex flex-col gap-space-xs" id="main-nav">
-          <a class="nav-item flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg transition-all bg-surface-container-high text-on-surface font-medium" data-path="dashboard" href="#dashboard">
-            <span class="material-symbols-outlined text-[20px]">grid_view</span>
-            <span class="font-label-md text-label-md">Dashboard</span>
+        <!-- Navigation Links (Swiss Modernist Hairline Style) -->
+        <nav class="flex flex-col gap-1" id="main-nav">
+          <a class="nav-item flex items-center gap-3 px-3 py-2.5 transition-all bg-surface-container-high text-on-surface font-medium" data-path="dashboard" href="#dashboard">
+            <span class="material-symbols-outlined text-[18px]">grid_view</span>
+            <span class="font-label-sm text-xs tracking-wider uppercase">Dashboard</span>
           </a>
-          <a class="nav-item flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="tasks-kanban" href="#tasks-kanban">
-            <span class="material-symbols-outlined text-[20px]">view_kanban</span>
-            <span class="font-label-md text-label-md">Tasks &amp; Kanban</span>
+          <a class="nav-item flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="tasks-kanban" href="#tasks-kanban">
+            <span class="material-symbols-outlined text-[18px]">view_kanban</span>
+            <span class="font-label-sm text-xs tracking-wider uppercase">Tasks &amp; Kanban</span>
           </a>
-          <a class="nav-item flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="pomodoro-timer" href="#pomodoro-timer">
-            <span class="material-symbols-outlined text-[20px]">timer</span>
-            <span class="font-label-md text-label-md">Pomodoro Timer</span>
+          <a class="nav-item flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="pomodoro-timer" href="#pomodoro-timer">
+            <span class="material-symbols-outlined text-[18px]">timer</span>
+            <span class="font-label-sm text-xs tracking-wider uppercase">Pomodoro Timer</span>
           </a>
-          <a class="nav-item flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="habit-tracker" href="#habit-tracker">
-            <span class="material-symbols-outlined text-[20px]">check_circle</span>
-            <span class="font-label-md text-label-md">Habit Tracker</span>
+          <a class="nav-item flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="habit-tracker" href="#habit-tracker">
+            <span class="material-symbols-outlined text-[18px]">check_circle</span>
+            <span class="font-label-sm text-xs tracking-wider uppercase">Habit Matrix</span>
           </a>
-          <a class="nav-item flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="daily-journal" href="#daily-journal">
-            <span class="material-symbols-outlined text-[20px]">menu_book</span>
-            <span class="font-label-md text-label-md">Daily Journal</span>
+          <a class="nav-item flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="daily-journal" href="#daily-journal">
+            <span class="material-symbols-outlined text-[18px]">menu_book</span>
+            <span class="font-label-sm text-xs tracking-wider uppercase">Daily Journal</span>
           </a>
-          <a class="nav-item flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="settings" href="#settings">
-            <span class="material-symbols-outlined text-[20px]">settings</span>
-            <span class="font-label-md text-label-md">Settings</span>
+          <a class="nav-item flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="settings" href="#settings">
+            <span class="material-symbols-outlined text-[18px]">settings</span>
+            <span class="font-label-sm text-xs tracking-wider uppercase">Settings &amp; Theme</span>
           </a>
         </nav>
       </div>
 
       <!-- User Profile Card & Logout -->
-      <div class="px-space-sm py-space-sm rounded-xl bg-surface-container/60 flex items-center justify-between gap-space-sm border border-surface-container-high/30">
-        <div class="flex items-center gap-space-sm min-w-0 cursor-pointer" id="sidebar-profile-click" title="Kustomisasi Profil">
-          <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center flex-shrink-0 font-bold overflow-hidden" id="sidebar-avatar-box">
+      <div class="p-3 bg-surface-container border border-surface-container-high/60 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0 cursor-pointer" id="sidebar-profile-click" title="Kustomisasi Profil">
+          <div class="w-8 h-8 bg-primary text-on-primary flex items-center justify-center flex-shrink-0 font-bold overflow-hidden font-mono text-xs" id="sidebar-avatar-box">
             <span id="sidebar-avatar-initial">A</span>
           </div>
           <div class="flex flex-col min-w-0">
-            <span class="font-label-md text-label-md text-on-surface font-semibold truncate" id="sidebar-user-nickname">Alex</span>
-            <span class="font-body-sm text-body-sm text-outline">Profil &amp; Akun</span>
+            <span class="font-body-sm text-xs text-on-surface font-semibold truncate" id="sidebar-user-nickname">Alex</span>
+            <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider">Profil &amp; Akun</span>
           </div>
         </div>
-        <button class="p-1.5 rounded-lg hover:bg-surface-container-high text-outline hover:text-error transition-all" id="logout-btn" title="Keluar / Logout" type="button">
+        <button class="p-1.5 text-outline hover:text-error transition-colors" id="logout-btn" title="Keluar / Logout" type="button">
           <span class="material-symbols-outlined text-[18px]">logout</span>
         </button>
       </div>
@@ -339,271 +442,260 @@
 
     <!-- Top Header Bar -->
     <div class="pl-72">
-      <header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-surface-container-high/30">
-        <div class="flex items-center gap-space-md">
-          <div class="flex items-center gap-space-xs text-on-surface-variant">
-            <span class="material-symbols-outlined text-[18px]">calendar_today</span>
-            <span class="font-label-md text-label-md text-on-surface" id="current-date-label">Selasa, 24 Oktober</span>
+      <header class="fixed top-0 left-72 right-0 h-16 bg-surface/90 backdrop-blur-md z-40 flex items-center justify-between px-space-lg border-b border-surface-container-high/40">
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-xs">
+            <span class="material-symbols-outlined text-[16px] text-outline">calendar_today</span>
+            <span class="text-on-surface font-mono" id="current-date-label">Selasa, 24 Oktober</span>
           </div>
-          <span class="text-outline-variant font-label-md">•</span>
-          <div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm">
-            <span class="material-symbols-outlined text-[14px]">cloud_done</span>
-            <span>Offline Ready</span>
+          <span class="text-outline-variant font-label-sm">•</span>
+          <div class="inline-flex items-center gap-1.5 px-2 py-0.5 bg-surface-container border border-surface-container-high text-secondary font-label-sm text-[11px] uppercase tracking-wider">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            <span>Offline Ready (Local)</span>
           </div>
         </div>
 
-        <!-- Top Right Account Customization & Actions -->
-        <div class="flex items-center gap-space-md">
-          <button class="inline-flex items-center gap-1.5 px-space-md py-1.5 rounded-lg bg-primary text-on-primary hover:bg-primary-fixed hover:text-on-primary-fixed font-label-md text-label-md transition-all shadow-sm" id="global-new-flow-btn" type="button">
-            <span class="material-symbols-outlined text-[18px]">add</span>
-            <span>New Flow Item</span>
+        <!-- Top Right Actions -->
+        <div class="flex items-center gap-4">
+          <button class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-on-primary hover:opacity-95 font-label-sm text-xs tracking-wider uppercase transition-all shadow-sm" id="global-new-flow-btn" type="button">
+            <span class="material-symbols-outlined text-[16px]">add</span>
+            <span>Item Baru</span>
           </button>
-          <div class="h-4 w-[1px] bg-outline-variant"></div>
+
+          <div class="h-4 w-[1px] bg-surface-container-high"></div>
 
           <!-- Clickable Profile Trigger in Header -->
-          <div class="flex items-center gap-space-xs cursor-pointer p-1 rounded-xl hover:bg-surface-container-high transition-all" id="header-profile-btn" title="Kustomisasi Profil Akun">
-            <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold overflow-hidden" id="header-avatar-box">
+          <div class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-surface-container transition-all" id="header-profile-btn" title="Kustomisasi Profil Akun">
+            <div class="w-7 h-7 bg-primary text-on-primary flex items-center justify-center font-bold overflow-hidden font-mono text-xs" id="header-avatar-box">
               <span id="header-avatar-initial">A</span>
             </div>
-            <span class="font-label-md text-label-md text-on-surface font-medium hidden sm:inline" id="header-user-nickname">Alex</span>
-            <span class="material-symbols-outlined text-[16px] text-outline">tune</span>
+            <span class="font-body-sm text-xs text-on-surface font-medium hidden sm:inline" id="header-user-nickname">Alex</span>
+            <span class="material-symbols-outlined text-[14px] text-outline">tune</span>
           </div>
 
-          <button class="p-1.5 rounded-lg hover:bg-surface-container-high text-outline hover:text-error transition-all" id="header-logout-btn" title="Keluar / Logout" type="button">
+          <button class="p-1.5 text-outline hover:text-error transition-colors" id="header-logout-btn" title="Keluar / Logout" type="button">
             <span class="material-symbols-outlined text-[18px]">logout</span>
           </button>
         </div>
       </header>
 
       <!-- Main Dynamic Content Container -->
-      <main class="relative pt-16 bg-surface min-h-screen px-space-lg pb-space-xl">
-        <div class="flex flex-col w-full">
+      <main class="relative pt-16 bg-surface min-h-screen px-space-lg pb-16">
+        <div class="flex flex-col w-full max-w-7xl mx-auto pt-6">
 
           <!-- ==================== VIEW 1: DASHBOARD ==================== -->
           <section class="view-section flex flex-col w-full" id="view-dashboard">
             <!-- Top Greeting & Header Bar -->
-            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg mb-space-xl">
-              <div class="flex flex-col gap-space-xs">
-                <div class="inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-surface-container-high w-fit">
-                  <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-                  <span class="font-label-sm text-label-sm text-secondary tracking-wide uppercase">Offline-Ready (Data disimpan lokal)</span>
-                  <span class="font-label-sm text-label-sm text-outline">• Zero Latency</span>
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 border-b border-surface-container-high/40 pb-6">
+              <div class="flex flex-col gap-2">
+                <div class="inline-flex items-center gap-2 text-outline font-label-sm text-xs tracking-wider uppercase">
+                  <span class="text-primary font-bold">STATUS //</span>
+                  <span>Ruang Kerja Terbuka • Zero Telemetry</span>
                 </div>
                 <!-- Dynamic Time Greeting with User's Nickname -->
-                <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-1" id="greeting-header">Selamat Siang, Alex ✨</h1>
+                <h1 class="font-headline-lg text-3xl sm:text-4xl text-on-surface font-normal" id="greeting-header">Selamat Siang, Alex ✨</h1>
                 <!-- Dynamic Personal Quote -->
-                <p class="font-body-md text-body-md text-on-surface-variant max-w-xl" id="dashboard-user-quote">
-                  <span class="text-tertiary-fixed font-medium">"Fokus pada satu hal penting hari ini."</span> Berikan ruang hening untuk pekerjaan bernilai tinggi.
+                <p class="font-body-md text-sm sm:text-base text-on-surface-variant max-w-2xl font-light italic" id="dashboard-user-quote">
+                  "Fokus pada satu hal penting hari ini." Berikan ruang hening untuk pekerjaan bernilai tinggi.
                 </p>
               </div>
 
               <!-- Quick Action / Mood status -->
-              <div class="flex items-center gap-space-md self-start lg:self-auto">
-                <div class="p-space-sm px-space-md rounded-xl bg-surface-container-low flex items-center gap-space-sm shadow-sm">
-                  <div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary">
-                    <span class="material-symbols-outlined text-[18px]">spa</span>
+              <div class="flex items-center gap-3 self-start lg:self-auto">
+                <div class="p-3 bg-surface-container-low border border-surface-container-high flex items-center gap-3">
+                  <div class="w-7 h-7 bg-surface-container-high flex items-center justify-center text-secondary">
+                    <span class="material-symbols-outlined text-[16px]">spa</span>
                   </div>
                   <div class="flex flex-col">
-                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Energi Hari Ini</span>
-                    <span class="font-label-md text-label-md text-on-surface font-semibold">Calm &amp; Focused 🌿</span>
+                    <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider">Energi Hari Ini</span>
+                    <span class="font-body-sm text-xs text-on-surface font-semibold">Calm &amp; Focused 🌿</span>
                   </div>
                 </div>
-                <button class="inline-flex items-center gap-2 px-space-md py-2.5 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all shadow-sm" id="quick-zen-btn" type="button">
-                  <span class="material-symbols-outlined text-[18px] text-tertiary">self_improvement</span>
+                <button class="inline-flex items-center gap-2 px-4 py-3 bg-surface-container-low border border-surface-container-high hover:border-outline text-on-surface font-label-sm text-xs tracking-wider uppercase transition-all" id="quick-zen-btn" type="button">
+                  <span class="material-symbols-outlined text-[16px] text-tertiary">self_improvement</span>
                   <span>Mode Hening</span>
                 </button>
               </div>
             </div>
 
-            <!-- Key Metrics Bento Row -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md mb-space-xl">
+            <!-- Key Metrics Bento Row (Swiss Architecture Hairlines) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               <!-- Card 1: Focus Time -->
-              <div class="p-space-lg rounded-xl bg-surface-container-low relative overflow-hidden shadow-sm group hover:bg-surface-container transition-all border border-surface-container-high/30">
-                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/5 rounded-full blur-xl group-hover:scale-125 transition-transform pointer-events-none"></div>
-                <div class="flex items-center justify-between mb-space-sm">
-                  <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Focus Time</span>
-                  <div class="w-7 h-7 rounded-lg bg-primary-container/30 text-primary flex items-center justify-center">
-                    <span class="material-symbols-outlined text-[16px]">timelapse</span>
-                  </div>
+              <div class="p-5 bg-surface-container-low border border-surface-container-high flex flex-col justify-between studio-card">
+                <div class="flex items-center justify-between mb-3 text-outline font-label-sm text-[11px] uppercase tracking-wider">
+                  <span>FOCUS DURATION</span>
+                  <span class="material-symbols-outlined text-[16px] text-primary">timelapse</span>
                 </div>
-                <div class="flex items-baseline gap-space-xs mb-1">
-                  <span class="font-headline-lg text-headline-lg text-on-surface font-bold" id="bento-focus-minutes">125</span>
-                  <span class="font-label-md text-label-md text-on-surface-variant">menit</span>
+                <div class="flex items-baseline gap-2 mb-1">
+                  <span class="font-mono text-3xl text-on-surface font-bold tracking-tight" id="bento-focus-minutes">125</span>
+                  <span class="font-label-sm text-xs text-outline">MENIT</span>
                 </div>
-                <div class="flex items-center gap-space-xs text-secondary font-label-sm text-label-sm" id="bento-focus-sessions-label">
-                  <span class="material-symbols-outlined text-[14px]">bolt</span>
+                <div class="flex items-center gap-1.5 text-secondary font-label-sm text-xs pt-2 border-t border-surface-container-high/40" id="bento-focus-sessions-label">
+                  <span class="material-symbols-outlined text-[14px]">adjust</span>
                   <span>5 sesi tercapai (Target: 6)</span>
                 </div>
               </div>
 
               <!-- Card 2: Tasks Completed -->
-              <div class="p-space-lg rounded-xl bg-surface-container-low relative overflow-hidden shadow-sm group hover:bg-surface-container transition-all border border-surface-container-high/30">
-                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-secondary/5 rounded-full blur-xl group-hover:scale-125 transition-transform pointer-events-none"></div>
-                <div class="flex items-center justify-between mb-space-sm">
-                  <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Penyelesaian Tugas</span>
-                  <div class="w-7 h-7 rounded-lg bg-secondary-container/20 text-secondary flex items-center justify-center">
-                    <span class="material-symbols-outlined text-[16px]">task_alt</span>
-                  </div>
+              <div class="p-5 bg-surface-container-low border border-surface-container-high flex flex-col justify-between studio-card">
+                <div class="flex items-center justify-between mb-3 text-outline font-label-sm text-[11px] uppercase tracking-wider">
+                  <span>PENYELESAIAN TUGAS</span>
+                  <span class="material-symbols-outlined text-[16px] text-secondary">task_alt</span>
                 </div>
-                <div class="flex items-baseline gap-space-xs mb-1" id="bento-completed-stat">
-                  <span class="font-headline-lg text-headline-lg text-on-surface font-bold">8<span class="text-outline font-normal">/12</span></span>
-                  <span class="font-label-md text-label-md text-secondary font-semibold ml-1">67%</span>
+                <div class="flex items-baseline gap-2 mb-1" id="bento-completed-stat">
+                  <span class="font-mono text-3xl text-on-surface font-bold tracking-tight">8<span class="text-outline font-normal text-xl">/12</span></span>
+                  <span class="font-mono text-xs text-secondary font-semibold ml-auto">67%</span>
                 </div>
-                <div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden mt-1.5">
-                  <div class="bg-secondary h-full rounded-full transition-all duration-500" id="bento-completed-bar" style="width: 67%"></div>
+                <div class="w-full bg-surface-container-highest h-1 overflow-hidden mt-2">
+                  <div class="bg-secondary h-full transition-all duration-500" id="bento-completed-bar" style="width: 67%"></div>
                 </div>
               </div>
 
               <!-- Card 3: Habit Streak -->
-              <div class="p-space-lg rounded-xl bg-surface-container-low relative overflow-hidden shadow-sm group hover:bg-surface-container transition-all border border-surface-container-high/30">
-                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-tertiary/5 rounded-full blur-xl group-hover:scale-125 transition-transform pointer-events-none"></div>
-                <div class="flex items-center justify-between mb-space-sm">
-                  <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Habit Consistency</span>
-                  <div class="w-7 h-7 rounded-lg bg-tertiary-container/30 text-tertiary-fixed-dim flex items-center justify-center">
-                    <span class="material-symbols-outlined text-[16px]">local_fire_department</span>
-                  </div>
+              <div class="p-5 bg-surface-container-low border border-surface-container-high flex flex-col justify-between studio-card">
+                <div class="flex items-center justify-between mb-3 text-outline font-label-sm text-[11px] uppercase tracking-wider">
+                  <span>HABIT CONSISTENCY</span>
+                  <span class="material-symbols-outlined text-[16px] text-tertiary">bolt</span>
                 </div>
-                <div class="flex items-baseline gap-space-xs mb-1">
-                  <span class="font-headline-lg text-headline-lg text-tertiary font-bold" id="bento-habit-streak">14</span>
-                  <span class="font-label-md text-label-md text-on-surface-variant">hari berturut-turut</span>
+                <div class="flex items-baseline gap-2 mb-1">
+                  <span class="font-mono text-3xl text-tertiary font-bold tracking-tight" id="bento-habit-streak">14</span>
+                  <span class="font-label-sm text-xs text-outline">HARI BERURUTAN</span>
                 </div>
-                <div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm">
-                  <span class="w-2 h-2 rounded-full bg-tertiary"></span>
-                  <span>Rekor tertinggi: 21 hari</span>
+                <div class="flex items-center gap-1.5 text-outline font-label-sm text-xs pt-2 border-t border-surface-container-high/40">
+                  <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  <span>Rekor konsistensi: 21 hari</span>
                 </div>
               </div>
 
               <!-- Card 4: Cognitive Load Meter -->
-              <div class="p-space-lg rounded-xl bg-surface-container-low relative overflow-hidden shadow-sm group hover:bg-surface-container transition-all border border-surface-container-high/30">
-                <div class="flex items-center justify-between mb-space-sm">
-                  <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Distraction Index</span>
-                  <div class="w-7 h-7 rounded-lg bg-surface-container-highest text-primary flex items-center justify-center">
-                    <span class="material-symbols-outlined text-[16px]">grain</span>
-                  </div>
+              <div class="p-5 bg-surface-container-low border border-surface-container-high flex flex-col justify-between studio-card">
+                <div class="flex items-center justify-between mb-3 text-outline font-label-sm text-[11px] uppercase tracking-wider">
+                  <span>DISTRACTION INDEX</span>
+                  <span class="material-symbols-outlined text-[16px] text-primary">grain</span>
                 </div>
-                <div class="flex items-baseline gap-space-xs mb-1">
-                  <span class="font-headline-lg text-headline-lg text-secondary font-bold">Rendah</span>
-                  <span class="font-label-sm text-label-sm text-on-surface-variant">0 interupsi</span>
+                <div class="flex items-baseline gap-2 mb-1">
+                  <span class="font-headline-sm text-2xl text-secondary font-bold">Rendah</span>
+                  <span class="font-label-sm text-xs text-outline">0 interupsi</span>
                 </div>
-                <div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
-                  <span>Sesi deep work terjaga optimal</span>
+                <div class="flex items-center gap-1.5 text-outline font-label-sm text-xs pt-2 border-t border-surface-container-high/40">
+                  <span>Ritme fokus terjaga stabil</span>
                 </div>
               </div>
             </div>
 
-            <!-- Central Workspace Grid (2 Columns) -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+            <!-- Central Workspace Grid (2 Columns: 7 Cols Left, 5 Cols Right) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
               <!-- LEFT COLUMN: Pomodoro + Priority Tasks (7 Cols) -->
-              <div class="lg:col-span-7 flex flex-col gap-space-xl">
-                <!-- Integrated Pomodoro Widget -->
-                <div class="p-space-lg rounded-xl bg-surface-container-low relative overflow-hidden shadow-sm border border-surface-container-high/30">
-                  <div class="flex items-center justify-between mb-space-md">
-                    <div class="flex items-center gap-space-xs">
-                      <span class="material-symbols-outlined text-tertiary text-[20px]">timer</span>
-                      <span class="font-headline-sm text-headline-sm text-on-surface">Focus Engine</span>
+              <div class="lg:col-span-7 flex flex-col gap-8">
+                <!-- Focus Engine Pomodoro Widget -->
+                <div class="p-6 bg-surface-container-low border border-surface-container-high flex flex-col gap-5">
+                  <div class="flex items-center justify-between border-b border-surface-container-high/50 pb-3">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-primary text-[18px]">timer</span>
+                      <span class="font-headline-sm text-base text-on-surface font-semibold uppercase tracking-wider">Focus Engine</span>
                     </div>
                     <!-- Mode Tabs -->
-                    <div class="flex items-center gap-1 p-1 rounded-lg bg-surface-container-highest/60 text-on-surface-variant text-label-sm font-label-sm">
-                      <button class="px-2.5 py-1 rounded bg-primary text-on-primary font-medium transition-all shadow-sm" id="mode-pomo" type="button">Pomodoro 25m</button>
-                      <button class="px-2.5 py-1 rounded hover:text-on-surface transition-all" id="mode-short" type="button">Short 5m</button>
-                      <button class="px-2.5 py-1 rounded hover:text-on-surface transition-all" id="mode-long" type="button">Long 15m</button>
+                    <div class="flex items-center gap-1 p-0.5 bg-surface-container border border-surface-container-high font-label-sm text-xs">
+                      <button class="px-3 py-1 bg-primary text-on-primary font-medium transition-all" id="mode-pomo" type="button">Pomodoro 25m</button>
+                      <button class="px-3 py-1 text-on-surface-variant hover:text-on-surface transition-all" id="mode-short" type="button">Short 5m</button>
+                      <button class="px-3 py-1 text-on-surface-variant hover:text-on-surface transition-all" id="mode-long" type="button">Long 15m</button>
                     </div>
                   </div>
 
                   <!-- Center Timer Presentation -->
-                  <div class="flex flex-col sm:flex-row items-center justify-between gap-space-lg p-space-md rounded-xl bg-surface-container/60 mb-space-md">
+                  <div class="flex flex-col sm:flex-row items-center justify-between gap-6 p-5 bg-surface-container border border-surface-container-high/60">
                     <!-- Circular Indicator + Digits -->
-                    <div class="relative flex items-center justify-center w-40 h-40">
+                    <div class="relative flex items-center justify-center w-36 h-36">
                       <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
-                        <circle class="text-surface-container-highest" cx="60" cy="60" fill="none" r="52" stroke="currentColor" stroke-width="6"></circle>
-                        <circle class="text-tertiary transition-all duration-500 ease-linear" cx="60" cy="60" fill="none" id="timer-progress-ring" r="52" stroke="currentColor" stroke-dasharray="326.7" stroke-dashoffset="65" stroke-linecap="round" stroke-width="6"></circle>
+                        <circle class="text-surface-container-highest" cx="60" cy="60" fill="none" r="52" stroke="currentColor" stroke-width="5"></circle>
+                        <circle class="text-primary transition-all duration-500 ease-linear" cx="60" cy="60" fill="none" id="timer-progress-ring" r="52" stroke="currentColor" stroke-dasharray="326.7" stroke-dashoffset="65" stroke-linecap="square" stroke-width="5"></circle>
                       </svg>
                       <div class="absolute flex flex-col items-center justify-center text-center">
-                        <span class="font-display text-headline-lg text-on-surface tracking-tighter font-semibold" id="timer-display">25:00</span>
-                        <span class="font-label-sm text-label-sm text-tertiary uppercase tracking-wider" id="timer-status">Siap Mulai</span>
+                        <span class="font-mono text-3xl text-on-surface tracking-tight font-bold" id="timer-display">25:00</span>
+                        <span class="font-label-sm text-[10px] text-primary uppercase tracking-widest mt-0.5" id="timer-status">Siap Mulai</span>
                       </div>
                     </div>
 
                     <!-- Controls & Meta Details -->
-                    <div class="flex flex-col flex-1 gap-space-md w-full sm:w-auto">
+                    <div class="flex flex-col flex-1 gap-4 w-full sm:w-auto">
                       <div class="flex flex-col gap-1">
-                        <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Sedang Fokus Pada</span>
-                        <div class="flex items-center gap-space-xs p-space-xs px-space-sm rounded-lg bg-surface-container-high/80 text-on-surface">
+                        <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider">Fokus Aktif Pada Tugas</span>
+                        <div class="flex items-center gap-2 p-2 bg-surface-container-high border border-surface-container-highest text-on-surface">
                           <span class="material-symbols-outlined text-[16px] text-primary">push_pin</span>
-                          <span class="font-body-sm text-body-sm font-medium truncate" id="active-task-name">Finalisasi Arsitektur Database</span>
+                          <span class="font-body-sm text-xs font-medium truncate" id="active-task-name">Pilih atau pin tugas dari daftar di bawah</span>
                         </div>
                       </div>
                       <!-- Timer Action Buttons -->
-                      <div class="flex items-center gap-space-sm">
-                        <button class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-space-md rounded-lg bg-primary hover:bg-primary-fixed text-on-primary hover:text-on-primary-fixed font-label-md text-label-md font-semibold transition-all shadow-sm" id="timer-toggle-btn" type="button">
-                          <span class="material-symbols-outlined text-[18px]" id="timer-toggle-icon">play_arrow</span>
+                      <div class="flex items-center gap-2">
+                        <button class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-primary hover:opacity-95 text-on-primary font-label-sm text-xs tracking-wider uppercase font-semibold transition-all shadow-sm" id="timer-toggle-btn" type="button">
+                          <span class="material-symbols-outlined text-[16px]" id="timer-toggle-icon">play_arrow</span>
                           <span id="timer-toggle-text">Mulai Fokus</span>
                         </button>
-                        <button class="p-2.5 rounded-lg bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface transition-all" id="timer-reset-btn" title="Reset Sesi" type="button">
-                          <span class="material-symbols-outlined text-[18px]">replay</span>
+                        <button class="p-2.5 bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface border border-surface-container-high transition-all" id="timer-reset-btn" title="Reset Sesi" type="button">
+                          <span class="material-symbols-outlined text-[16px]">replay</span>
                         </button>
-                        <button class="p-2.5 rounded-lg bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface transition-all" id="timer-skip-btn" title="Lewati / Selesai" type="button">
-                          <span class="material-symbols-outlined text-[18px]">skip_next</span>
+                        <button class="p-2.5 bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface border border-surface-container-high transition-all" id="timer-skip-btn" title="Lewati / Selesai" type="button">
+                          <span class="material-symbols-outlined text-[16px]">skip_next</span>
                         </button>
                       </div>
                     </div>
                   </div>
 
-                  <div class="flex items-center justify-between text-outline font-label-sm text-label-sm px-1">
+                  <div class="flex items-center justify-between text-outline font-label-sm text-[11px] px-1">
                     <div class="flex items-center gap-1.5">
                       <span class="material-symbols-outlined text-[14px]">headphones</span>
-                      <span>Audio Ambience: Web Audio Synth (Aktif)</span>
+                      <span>Audio Ambience: Web Audio Synth (Lokal)</span>
                     </div>
-                    <span>Sesi hari ini</span>
+                    <span>Zero Drift Timer</span>
                   </div>
                 </div>
 
                 <!-- Today's Priority Tasks -->
-                <div class="p-space-lg rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-md border border-surface-container-high/30">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-space-xs">
-                      <span class="material-symbols-outlined text-secondary text-[20px]">check_box</span>
-                      <h2 class="font-headline-sm text-headline-sm text-on-surface">Target Prioritas Hari Ini</h2>
+                <div class="p-6 bg-surface-container-low border border-surface-container-high flex flex-col gap-4">
+                  <div class="flex items-center justify-between border-b border-surface-container-high/50 pb-3">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-secondary text-[18px]">check_box</span>
+                      <h2 class="font-headline-sm text-base text-on-surface font-semibold uppercase tracking-wider">Target Prioritas Hari Ini</h2>
                     </div>
-                    <span class="font-label-sm text-label-sm text-on-surface-variant" id="tasks-remaining-badge">3 Tersisa</span>
+                    <span class="font-label-sm text-xs text-outline" id="tasks-remaining-badge">0 Tersisa</span>
                   </div>
 
                   <!-- Quick Task Input -->
-                  <form class="flex items-center gap-space-xs p-1.5 rounded-xl bg-surface-container-high/90 focus-within:bg-surface-container-highest transition-all" id="task-add-form">
-                    <span class="material-symbols-outlined text-outline ml-2 text-[20px]">add_task</span>
-                    <input class="bg-transparent flex-1 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none px-2" id="new-task-input" placeholder="+ Tambah tugas cepat (tekan Enter)..." required="" type="text"/>
-                    <select class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2 py-1.5 rounded-lg focus:outline-none" id="new-task-tag">
+                  <form class="flex items-center gap-2 p-1.5 bg-surface-container border border-surface-container-high focus-within:border-primary transition-all" id="task-add-form">
+                    <span class="material-symbols-outlined text-outline ml-2 text-[18px]">add_task</span>
+                    <input class="bg-transparent flex-1 font-body-sm text-xs text-on-surface placeholder:text-outline focus:outline-none px-2" id="new-task-input" placeholder="+ Tambah tugas baru (tekan Enter)..." required="" type="text"/>
+                    <select class="bg-surface-container-high text-on-surface-variant font-label-sm text-xs px-2 py-1 focus:outline-none border border-surface-container-highest" id="new-task-tag">
                       <option value="Tech">Tech</option>
                       <option value="Docs">Docs</option>
                       <option value="Design">Design</option>
                       <option value="Planning">Planning</option>
                     </select>
-                    <button class="px-space-sm py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-medium hover:bg-primary-fixed hover:text-on-primary-fixed transition-all" type="submit">
+                    <button class="px-4 py-1.5 bg-primary text-on-primary font-label-sm text-xs tracking-wider uppercase hover:opacity-95 transition-all" type="submit">
                       Simpan
                     </button>
                   </form>
 
                   <!-- Tasks List Container -->
-                  <div class="flex flex-col gap-space-xs" id="tasks-list">
+                  <div class="flex flex-col gap-2" id="tasks-list">
                     <!-- Dynamic Render -->
                   </div>
                 </div>
               </div>
 
-              <!-- RIGHT COLUMN: Habit Tracker & Evening Reflection (5 Cols) -->
-              <div class="lg:col-span-5 flex flex-col gap-space-xl">
-                <!-- Habit Tracker Widget -->
-                <div class="p-space-lg rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-md border border-surface-container-high/30">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-space-xs">
-                      <span class="material-symbols-outlined text-secondary text-[20px]">calendar_view_week</span>
-                      <h2 class="font-headline-sm text-headline-sm text-on-surface">Habit Matrix</h2>
+              <!-- RIGHT COLUMN: Habit Matrix & Reflection (5 Cols) -->
+              <div class="lg:col-span-5 flex flex-col gap-8">
+                <!-- Habit Matrix Widget -->
+                <div class="p-6 bg-surface-container-low border border-surface-container-high flex flex-col gap-4">
+                  <div class="flex items-center justify-between border-b border-surface-container-high/50 pb-3">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-secondary text-[18px]">calendar_view_week</span>
+                      <h2 class="font-headline-sm text-base text-on-surface font-semibold uppercase tracking-wider">Habit Matrix</h2>
                     </div>
-                    <span class="font-label-sm text-label-sm text-secondary font-medium">7-Hari Tracker</span>
+                    <span class="font-label-sm text-xs text-secondary font-medium">7-HARI TRACKER</span>
                   </div>
 
                   <!-- 7-Day Header Marker -->
-                  <div class="flex items-center justify-between pl-36 pr-1 text-center font-label-sm text-label-sm text-outline">
+                  <div class="flex items-center justify-between pl-32 pr-1 text-center font-label-sm text-[11px] text-outline">
                     <span class="w-6">Sen</span>
                     <span class="w-6 text-on-surface font-semibold">Sel</span>
                     <span class="w-6">Rab</span>
@@ -614,54 +706,54 @@
                   </div>
 
                   <!-- Dynamic Habit Rows Container -->
-                  <div class="flex flex-col gap-space-xs" id="habits-matrix-container">
+                  <div class="flex flex-col gap-2" id="habits-matrix-container">
                     <!-- Dynamic Render -->
                   </div>
                 </div>
 
                 <!-- Evening Reflection / Daily Journal -->
-                <div class="p-space-lg rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-md border border-surface-container-high/30">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-space-xs">
-                      <span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
-                      <h2 class="font-headline-sm text-headline-sm text-on-surface">Refleksi Hari Ini</h2>
+                <div class="p-6 bg-surface-container-low border border-surface-container-high flex flex-col gap-4">
+                  <div class="flex items-center justify-between border-b border-surface-container-high/50 pb-3">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-primary text-[18px]">edit_note</span>
+                      <h2 class="font-headline-sm text-base text-on-surface font-semibold uppercase tracking-wider">Refleksi Hari Ini</h2>
                     </div>
-                    <span class="font-label-sm text-label-sm text-secondary flex items-center gap-1" id="journal-autosave-badge">
+                    <span class="font-label-sm text-xs text-secondary flex items-center gap-1" id="journal-autosave-badge">
                       <span class="material-symbols-outlined text-[14px]">done_all</span>
                       <span>Tersimpan</span>
                     </span>
                   </div>
 
-                  <p class="font-body-sm text-body-sm text-on-surface-variant font-medium">
-                    "Apa hal terbaik yang berhasil kamu selesaikan hari ini?"
+                  <p class="font-body-sm text-xs text-on-surface-variant font-light italic">
+                    "Apa capaian atau pemahaman paling berharga yang Anda peroleh hari ini?"
                   </p>
 
                   <!-- Mood Selector Chips -->
                   <div class="flex flex-wrap gap-1.5">
-                    <button class="mood-btn px-2.5 py-1 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm hover:bg-surface-container-highest transition-all flex items-center gap-1" data-mood="Puas" type="button">
+                    <button class="mood-btn px-3 py-1 bg-surface-container border border-surface-container-high text-on-surface font-label-sm text-xs hover:border-outline transition-all flex items-center gap-1.5" data-mood="Puas" type="button">
                       <span>😊</span><span>Puas</span>
                     </button>
-                    <button class="mood-btn px-2.5 py-1 rounded-lg bg-secondary text-on-secondary font-label-sm text-label-sm transition-all flex items-center gap-1 font-semibold" data-mood="Tenang" type="button">
+                    <button class="mood-btn px-3 py-1 bg-secondary text-on-secondary font-label-sm text-xs transition-all flex items-center gap-1.5 font-semibold" data-mood="Tenang" type="button">
                       <span>🌿</span><span>Tenang</span>
                     </button>
-                    <button class="mood-btn px-2.5 py-1 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm hover:bg-surface-container-highest transition-all flex items-center gap-1" data-mood="Produktif" type="button">
+                    <button class="mood-btn px-3 py-1 bg-surface-container border border-surface-container-high text-on-surface font-label-sm text-xs hover:border-outline transition-all flex items-center gap-1.5" data-mood="Produktif" type="button">
                       <span>⚡</span><span>Produktif</span>
                     </button>
-                    <button class="mood-btn px-2.5 py-1 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm hover:bg-surface-container-highest transition-all flex items-center gap-1" data-mood="Lelah" type="button">
+                    <button class="mood-btn px-3 py-1 bg-surface-container border border-surface-container-high text-on-surface font-label-sm text-xs hover:border-outline transition-all flex items-center gap-1.5" data-mood="Lelah" type="button">
                       <span>😴</span><span>Lelah</span>
                     </button>
                   </div>
 
                   <!-- Reflection Textarea -->
                   <div class="relative">
-                    <textarea class="w-full bg-surface-container/70 rounded-xl p-space-sm font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container transition-all resize-none" id="journal-input" placeholder="Tuliskan 1-3 refleksi singkat sebelum menutup hari..." rows="3"></textarea>
+                    <textarea class="w-full bg-surface-container border border-surface-container-high p-3 font-body-sm text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-primary transition-all resize-none" id="journal-input" placeholder="Tuliskan 1-3 refleksi singkat sebelum menutup hari..." rows="3"></textarea>
                   </div>
 
                   <div class="flex items-center justify-between pt-1">
-                    <span class="font-label-sm text-label-sm text-outline">Catatan tersinkron di storage peramban.</span>
-                    <button class="inline-flex items-center gap-1.5 px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all" id="save-journal-btn" type="button">
+                    <span class="font-label-sm text-[11px] text-outline">Tersinkron di storage peramban.</span>
+                    <button class="inline-flex items-center gap-1.5 px-4 py-2 bg-surface-container-high hover:bg-surface-container-highest border border-surface-container-highest text-on-surface font-label-sm text-xs tracking-wider uppercase transition-all" id="save-journal-btn" type="button">
                       <span class="material-symbols-outlined text-[16px] text-secondary">save</span>
-                      <span>Simpan</span>
+                      <span>Simpan Catatan</span>
                     </button>
                   </div>
                 </div>
@@ -670,221 +762,228 @@
           </section>
 
           <!-- ==================== VIEW 2: TASKS & KANBAN ==================== -->
-          <section class="view-section hidden flex-col w-full gap-space-xl" id="view-tasks-kanban">
-            <div class="flex items-center justify-between">
+          <section class="view-section hidden flex-col w-full gap-6" id="view-tasks-kanban">
+            <div class="flex items-center justify-between border-b border-surface-container-high/50 pb-4">
               <div class="flex flex-col">
-                <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Tasks &amp; Kanban Board</h1>
-                <p class="font-body-md text-body-md text-on-surface-variant">Kelola seluruh alur kerja dan prioritas tugas kamu secara visual.</p>
+                <span class="font-label-sm text-xs uppercase tracking-widest text-outline">MANAJEMEN ALUR KERJA</span>
+                <h1 class="font-headline-lg text-2xl sm:text-3xl text-on-surface font-normal">Tasks &amp; Kanban Board</h1>
               </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
-              <!-- Kanban Column: TO DO -->
-              <div class="flex flex-col gap-space-md p-space-md rounded-2xl bg-surface-container-low/80 border border-surface-container-high/40">
-                <div class="flex items-center justify-between px-1">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <!-- Column: TO DO -->
+              <div class="flex flex-col gap-4 p-4 bg-surface-container-low border border-surface-container-high">
+                <div class="flex items-center justify-between border-b border-surface-container-high/40 pb-2">
                   <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-tertiary"></span>
-                    <h3 class="font-headline-sm text-headline-sm text-on-surface">To Do</h3>
+                    <span class="w-2.5 h-2.5 bg-tertiary"></span>
+                    <h3 class="font-headline-sm text-sm text-on-surface uppercase tracking-wider font-semibold">To Do</h3>
                   </div>
-                  <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-outline font-label-sm text-label-sm" id="todo-count-badge">0</span>
+                  <span class="font-mono text-xs text-outline" id="todo-count-badge">0</span>
                 </div>
-                <div class="flex flex-col gap-space-sm min-h-[300px]" id="kanban-col-todo"></div>
+                <div class="flex flex-col gap-2 min-h-[360px]" id="kanban-col-todo"></div>
               </div>
 
-              <!-- Kanban Column: IN PROGRESS -->
-              <div class="flex flex-col gap-space-md p-space-md rounded-2xl bg-surface-container-low/80 border border-surface-container-high/40">
-                <div class="flex items-center justify-between px-1">
+              <!-- Column: IN PROGRESS -->
+              <div class="flex flex-col gap-4 p-4 bg-surface-container-low border border-surface-container-high">
+                <div class="flex items-center justify-between border-b border-surface-container-high/40 pb-2">
                   <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-primary"></span>
-                    <h3 class="font-headline-sm text-headline-sm text-on-surface">In Progress</h3>
+                    <span class="w-2.5 h-2.5 bg-primary"></span>
+                    <h3 class="font-headline-sm text-sm text-on-surface uppercase tracking-wider font-semibold">In Progress</h3>
                   </div>
-                  <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-outline font-label-sm text-label-sm" id="in-progress-count-badge">0</span>
+                  <span class="font-mono text-xs text-outline" id="in-progress-count-badge">0</span>
                 </div>
-                <div class="flex flex-col gap-space-sm min-h-[300px]" id="kanban-col-in-progress"></div>
+                <div class="flex flex-col gap-2 min-h-[360px]" id="kanban-col-in-progress"></div>
               </div>
 
-              <!-- Kanban Column: DONE -->
-              <div class="flex flex-col gap-space-md p-space-md rounded-2xl bg-surface-container-low/80 border border-surface-container-high/40">
-                <div class="flex items-center justify-between px-1">
+              <!-- Column: DONE -->
+              <div class="flex flex-col gap-4 p-4 bg-surface-container-low border border-surface-container-high">
+                <div class="flex items-center justify-between border-b border-surface-container-high/40 pb-2">
                   <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-secondary"></span>
-                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Completed</h3>
+                    <span class="w-2.5 h-2.5 bg-secondary"></span>
+                    <h3 class="font-headline-sm text-sm text-on-surface uppercase tracking-wider font-semibold">Completed</h3>
                   </div>
-                  <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-outline font-label-sm text-label-sm" id="done-count-badge">0</span>
+                  <span class="font-mono text-xs text-outline" id="done-count-badge">0</span>
                 </div>
-                <div class="flex flex-col gap-space-sm min-h-[300px]" id="kanban-col-done"></div>
+                <div class="flex flex-col gap-2 min-h-[360px]" id="kanban-col-done"></div>
               </div>
             </div>
           </section>
 
           <!-- ==================== VIEW 3: POMODORO TIMER ==================== -->
-          <section class="view-section hidden flex-col w-full items-center justify-center py-space-xl" id="view-pomodoro-timer">
-            <div class="w-full max-w-xl p-space-xl rounded-2xl bg-surface-container-low border border-surface-container-high/40 shadow-lg flex flex-col items-center gap-space-lg text-center">
-              <h1 class="font-headline-lg text-headline-lg text-on-surface">Dedicated Focus Timer</h1>
-              <p class="font-body-md text-body-md text-on-surface-variant max-w-md">Bebaskan pikiran dari gangguan. Selesaikan sesi fokus satu demi satu.</p>
+          <section class="view-section hidden flex-col w-full items-center justify-center py-12" id="view-pomodoro-timer">
+            <div class="w-full max-w-xl p-8 bg-surface-container-low border border-surface-container-high shadow-xl flex flex-col items-center gap-6 text-center">
+              <span class="font-label-sm text-xs text-primary uppercase tracking-widest font-bold">DEDICATED FOCUS ENGINE</span>
+              <h1 class="font-headline-lg text-3xl text-on-surface font-normal">Ruang Fokus Imersif</h1>
+              <p class="font-body-sm text-sm text-on-surface-variant max-w-md font-light">
+                Bebaskan pikiran dari interupsi digital. Kerjakan sesi fokus dengan disiplin waktu tanpa kompromi.
+              </p>
               
-              <div class="relative flex items-center justify-center w-64 h-64 my-space-md">
+              <div class="relative flex items-center justify-center w-64 h-64 my-4">
                 <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
-                  <circle class="text-surface-container-highest" cx="60" cy="60" fill="none" r="52" stroke="currentColor" stroke-width="5"></circle>
-                  <circle class="text-secondary transition-all duration-500 ease-linear" cx="60" cy="60" fill="none" r="52" stroke="currentColor" stroke-dasharray="326.7" stroke-dashoffset="0" stroke-linecap="round" stroke-width="5"></circle>
+                  <circle class="text-surface-container-highest" cx="60" cy="60" fill="none" r="52" stroke="currentColor" stroke-width="4"></circle>
+                  <circle class="text-primary transition-all duration-500 ease-linear" cx="60" cy="60" fill="none" r="52" stroke="currentColor" stroke-dasharray="326.7" stroke-dashoffset="0" stroke-linecap="square" stroke-width="4"></circle>
                 </svg>
                 <div class="absolute flex flex-col items-center justify-center">
-                  <span class="font-display text-display text-on-surface tracking-tight font-bold">25:00</span>
-                  <span class="font-label-md text-label-md text-secondary uppercase tracking-widest mt-1">Deep Work</span>
+                  <span class="font-mono text-5xl text-on-surface tracking-tight font-bold">25:00</span>
+                  <span class="font-label-sm text-xs text-primary uppercase tracking-widest mt-2">DEEP WORK</span>
                 </div>
+              </div>
+
+              <div class="text-outline font-label-sm text-xs">
+                Sesi dihitung dan disinkronkan langsung ke statistik harian.
               </div>
             </div>
           </section>
 
           <!-- ==================== VIEW 4: HABIT TRACKER ==================== -->
-          <section class="view-section hidden flex-col w-full gap-space-xl" id="view-habit-tracker">
-            <div class="flex items-center justify-between">
+          <section class="view-section hidden flex-col w-full gap-6" id="view-habit-tracker">
+            <div class="flex items-center justify-between border-b border-surface-container-high/50 pb-4">
               <div class="flex flex-col">
-                <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Habit Tracker Matrix</h1>
-                <p class="font-body-md text-body-md text-on-surface-variant">Bangun konsistensi harian secara berkelanjutan.</p>
+                <span class="font-label-sm text-xs uppercase tracking-widest text-outline">KONSISTENSI JANGKA PANJANG</span>
+                <h1 class="font-headline-lg text-2xl sm:text-3xl text-on-surface font-normal">Habit Tracker Matrix</h1>
               </div>
             </div>
 
-            <div class="p-space-lg rounded-2xl bg-surface-container-low border border-surface-container-high/40 flex flex-col gap-space-md">
-              <div class="flex items-center gap-space-sm max-w-md">
-                <input class="flex-1 bg-surface-container-high p-2.5 rounded-xl text-on-surface font-body-sm placeholder:text-outline focus:outline-none" id="new-habit-input" placeholder="Nama kebiasaan baru..." type="text"/>
-                <button class="px-space-md py-2.5 rounded-xl bg-primary text-on-primary font-label-md font-semibold hover:bg-primary-fixed transition-all" id="add-habit-btn" type="button">
+            <div class="p-6 bg-surface-container-low border border-surface-container-high flex flex-col gap-5">
+              <div class="flex items-center gap-3 max-w-md">
+                <input class="flex-1 bg-surface-container border border-surface-container-high p-2.5 text-on-surface font-body-sm text-xs placeholder:text-outline focus:outline-none focus:border-primary" id="new-habit-input" placeholder="Nama kebiasaan baru..." type="text"/>
+                <button class="px-5 py-2.5 bg-primary text-on-primary font-label-sm text-xs tracking-wider uppercase hover:opacity-95 transition-all" id="add-habit-btn" type="button">
                   + Tambah Habit
                 </button>
               </div>
 
-              <div class="flex flex-col gap-space-md mt-space-sm" id="full-habits-container"></div>
+              <div class="flex flex-col gap-3 mt-2" id="full-habits-container"></div>
             </div>
           </section>
 
           <!-- ==================== VIEW 5: DAILY JOURNAL ==================== -->
-          <section class="view-section hidden flex-col w-full gap-space-xl" id="view-daily-journal">
-            <div class="flex flex-col">
-              <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Daily Journal &amp; Reflection</h1>
-              <p class="font-body-md text-body-md text-on-surface-variant">Arsip catatan refleksi harian dan perkembangan emosional kamu.</p>
+          <section class="view-section hidden flex-col w-full gap-6" id="view-daily-journal">
+            <div class="flex flex-col border-b border-surface-container-high/50 pb-4">
+              <span class="font-label-sm text-xs uppercase tracking-widest text-outline">ARSIP INTROSPEKSI</span>
+              <h1 class="font-headline-lg text-2xl sm:text-3xl text-on-surface font-normal">Daily Journal &amp; Reflection</h1>
             </div>
 
-            <div class="flex flex-col gap-space-md" id="journal-history-container"></div>
+            <div class="flex flex-col gap-4" id="journal-history-container"></div>
           </section>
 
           <!-- ==================== VIEW 6: SETTINGS & THEMES ==================== -->
-          <section class="view-section hidden flex-col w-full gap-space-xl max-w-4xl" id="view-settings">
-            <div class="flex flex-col">
-              <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Settings &amp; Color Themes</h1>
-              <p class="font-body-md text-body-md text-on-surface-variant">Sesuaikan tema warna penenang, durasi timer, dan kelola data akun.</p>
+          <section class="view-section hidden flex-col w-full gap-8 max-w-4xl" id="view-settings">
+            <div class="flex flex-col border-b border-surface-container-high/50 pb-4">
+              <span class="font-label-sm text-xs uppercase tracking-widest text-outline">KONFIGURASI SISTEM</span>
+              <h1 class="font-headline-lg text-2xl sm:text-3xl text-on-surface font-normal">Settings &amp; Studio Themes</h1>
             </div>
 
             <!-- Theme Chooser Box -->
-            <div class="p-space-lg rounded-2xl bg-surface-container-low border border-surface-container-high/40 flex flex-col gap-space-md shadow-sm">
-              <div class="flex flex-col">
-                <h3 class="font-headline-sm text-headline-sm text-on-surface">Pilihan Warna Tema Penenang (Mengubah Warna Seluruh Aplikasi &amp; Taskbar) 🌿</h3>
-                <p class="font-body-sm text-outline">Pilih palet warna yang membuat suasana kerja terasa sejuk dan fokus.</p>
+            <div class="p-6 bg-surface-container-low border border-surface-container-high flex flex-col gap-5">
+              <div class="flex flex-col gap-1">
+                <h3 class="font-headline-sm text-base text-on-surface uppercase tracking-wider font-semibold">Palet Tema Penenang (Swiss &amp; Kyoto Studio)</h3>
+                <p class="font-body-sm text-xs text-outline font-light">Pilih atmosfer kerja yang tenang, membumi, dan bebas dari warna generik.</p>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-md" id="theme-selector-grid">
-                <!-- Palette 1: Deep Ocean -->
-                <button class="theme-card p-space-md rounded-xl border border-surface-container-highest hover:border-primary transition-all text-left flex flex-col gap-space-xs bg-surface-container/60" data-theme="deep-ocean" type="button">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="theme-selector-grid">
+                <!-- Palette 1: Kyoto Sumi & Cinnabar -->
+                <button class="theme-card p-4 border border-surface-container-highest hover:border-primary transition-all text-left flex flex-col gap-2 bg-surface-container" data-theme="kyoto-ink" type="button">
                   <div class="flex items-center justify-between">
-                    <span class="font-label-md font-semibold text-on-surface">Calm Deep Ocean</span>
-                    <span class="material-symbols-outlined text-[18px] text-primary theme-check-icon">check_circle</span>
+                    <span class="font-body-sm text-xs font-semibold text-on-surface">Kyoto Sumi &amp; Cinnabar</span>
+                    <span class="material-symbols-outlined text-[16px] text-primary theme-check-icon">check_circle</span>
                   </div>
-                  <p class="font-body-sm text-outline text-[11px]">Biru keunguan gelap untuk fokus mendalam.</p>
+                  <p class="font-body-sm text-outline text-[11px] font-light">Arang sumi hangat, washi krem &amp; stempel merah.</p>
                   <div class="flex items-center gap-1.5 pt-1">
-                    <span class="w-5 h-5 rounded-full bg-[#0b1326] border border-white/10"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#c0c1ff]"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#4edea3]"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#ffb95f]"></span>
+                    <span class="w-4 h-4 bg-[#111213] border border-white/20"></span>
+                    <span class="w-4 h-4 bg-[#e64528]"></span>
+                    <span class="w-4 h-4 bg-[#7eb382]"></span>
+                    <span class="w-4 h-4 bg-[#f4f3ed]"></span>
                   </div>
                 </button>
 
-                <!-- Palette 2: Zen Sage -->
-                <button class="theme-card p-space-md rounded-xl border border-surface-container-highest hover:border-primary transition-all text-left flex flex-col gap-space-xs bg-surface-container/60" data-theme="zen-sage" type="button">
+                <!-- Palette 2: Swiss Modernist Slate -->
+                <button class="theme-card p-4 border border-surface-container-highest hover:border-primary transition-all text-left flex flex-col gap-2 bg-surface-container" data-theme="swiss-grid" type="button">
                   <div class="flex items-center justify-between">
-                    <span class="font-label-md font-semibold text-on-surface">Zen Sage &amp; Forest</span>
-                    <span class="material-symbols-outlined text-[18px] text-primary theme-check-icon hidden">check_circle</span>
+                    <span class="font-body-sm text-xs font-semibold text-on-surface">Swiss Modernist Slate</span>
+                    <span class="material-symbols-outlined text-[16px] text-primary theme-check-icon hidden">check_circle</span>
                   </div>
-                  <p class="font-body-sm text-outline text-[11px]">Hijau daun sage yang sejuk dan menenangkan.</p>
+                  <p class="font-body-sm text-outline text-[11px] font-light">Batu slate arsitektural &amp; oranye Zurich.</p>
                   <div class="flex items-center gap-1.5 pt-1">
-                    <span class="w-5 h-5 rounded-full bg-[#0b1a15] border border-white/10"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#6ffbbe]"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#a7f3d0]"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#fcd34d]"></span>
+                    <span class="w-4 h-4 bg-[#121315] border border-white/20"></span>
+                    <span class="w-4 h-4 bg-[#ff4d00]"></span>
+                    <span class="w-4 h-4 bg-[#3ecf8e]"></span>
+                    <span class="w-4 h-4 bg-[#f2f4f8]"></span>
                   </div>
                 </button>
 
-                <!-- Palette 3: Serene Warm Amber -->
-                <button class="theme-card p-space-md rounded-xl border border-surface-container-highest hover:border-primary transition-all text-left flex flex-col gap-space-xs bg-surface-container/60" data-theme="serene-sunset" type="button">
+                <!-- Palette 3: Retro Raw Paper -->
+                <button class="theme-card p-4 border border-surface-container-highest hover:border-primary transition-all text-left flex flex-col gap-2 bg-surface-container" data-theme="retro-paper" type="button">
                   <div class="flex items-center justify-between">
-                    <span class="font-label-md font-semibold text-on-surface">Serene Warm Amber</span>
-                    <span class="material-symbols-outlined text-[18px] text-primary theme-check-icon hidden">check_circle</span>
+                    <span class="font-body-sm text-xs font-semibold text-on-surface">Retro Raw Paper &amp; Ochre</span>
+                    <span class="material-symbols-outlined text-[16px] text-primary theme-check-icon hidden">check_circle</span>
                   </div>
-                  <p class="font-body-sm text-outline text-[11px]">Warna hangat senja amber yang rileks.</p>
+                  <p class="font-body-sm text-outline text-[11px] font-light">Kertas antik, terakota hangat &amp; sage.</p>
                   <div class="flex items-center gap-1.5 pt-1">
-                    <span class="w-5 h-5 rounded-full bg-[#1a130f] border border-white/10"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#ffd099]"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#6ee7b7]"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#f472b6]"></span>
+                    <span class="w-4 h-4 bg-[#171513] border border-white/20"></span>
+                    <span class="w-4 h-4 bg-[#c86432]"></span>
+                    <span class="w-4 h-4 bg-[#8fa876]"></span>
+                    <span class="w-4 h-4 bg-[#f5efe4]"></span>
                   </div>
                 </button>
 
-                <!-- Palette 4: Nordic Twilight -->
-                <button class="theme-card p-space-md rounded-xl border border-surface-container-highest hover:border-primary transition-all text-left flex flex-col gap-space-xs bg-surface-container/60" data-theme="nordic-twilight" type="button">
+                <!-- Palette 4: Monochrome Bauhaus Dark -->
+                <button class="theme-card p-4 border border-surface-container-highest hover:border-primary transition-all text-left flex flex-col gap-2 bg-surface-container" data-theme="sumi-charcoal" type="button">
                   <div class="flex items-center justify-between">
-                    <span class="font-label-md font-semibold text-on-surface">Nordic Twilight</span>
-                    <span class="material-symbols-outlined text-[18px] text-primary theme-check-icon hidden">check_circle</span>
+                    <span class="font-body-sm text-xs font-semibold text-on-surface">Monochrome Bauhaus</span>
+                    <span class="material-symbols-outlined text-[16px] text-primary theme-check-icon hidden">check_circle</span>
                   </div>
-                  <p class="font-body-sm text-outline text-[11px]">Sentuhan lavender &amp; biru fajar dingin.</p>
+                  <p class="font-body-sm text-outline text-[11px] font-light">Monokrom kontras tinggi dengan aksen merah sinyal.</p>
                   <div class="flex items-center gap-1.5 pt-1">
-                    <span class="w-5 h-5 rounded-full bg-[#12111d] border border-white/10"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#d8b4fe]"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#38bdf8]"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#f43f5e]"></span>
+                    <span class="w-4 h-4 bg-[#0d0d0e] border border-white/20"></span>
+                    <span class="w-4 h-4 bg-[#d83a27]"></span>
+                    <span class="w-4 h-4 bg-[#9ca3af]"></span>
+                    <span class="w-4 h-4 bg-[#fafafa]"></span>
                   </div>
                 </button>
 
-                <!-- Palette 5: Soft Minimal Teal -->
-                <button class="theme-card p-space-md rounded-xl border border-surface-container-highest hover:border-primary transition-all text-left flex flex-col gap-space-xs bg-surface-container/60" data-theme="soft-minimal" type="button">
+                <!-- Palette 5: Nordic Pine & Stone -->
+                <button class="theme-card p-4 border border-surface-container-highest hover:border-primary transition-all text-left flex flex-col gap-2 bg-surface-container" data-theme="nordic-moss" type="button">
                   <div class="flex items-center justify-between">
-                    <span class="font-label-md font-semibold text-on-surface">Soft Minimal Teal</span>
-                    <span class="material-symbols-outlined text-[18px] text-primary theme-check-icon hidden">check_circle</span>
+                    <span class="font-body-sm text-xs font-semibold text-on-surface">Nordic Pine &amp; Stone</span>
+                    <span class="material-symbols-outlined text-[16px] text-primary theme-check-icon hidden">check_circle</span>
                   </div>
-                  <p class="font-body-sm text-outline text-[11px]">Kontras lembut teal malam yang jernih.</p>
+                  <p class="font-body-sm text-outline text-[11px] font-light">Hutan pinus Skandinavia &amp; bata Nordik.</p>
                   <div class="flex items-center gap-1.5 pt-1">
-                    <span class="w-5 h-5 rounded-full bg-[#0d1821] border border-white/10"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#99f6e4]"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#38bdf8]"></span>
-                    <span class="w-5 h-5 rounded-full bg-[#fbbf24]"></span>
+                    <span class="w-4 h-4 bg-[#101512] border border-white/20"></span>
+                    <span class="w-4 h-4 bg-[#c25732]"></span>
+                    <span class="w-4 h-4 bg-[#7eb897]"></span>
+                    <span class="w-4 h-4 bg-[#eef5f0]"></span>
                   </div>
                 </button>
               </div>
             </div>
 
             <!-- Timer Settings -->
-            <div class="p-space-lg rounded-2xl bg-surface-container-low border border-surface-container-high/40 flex flex-col gap-space-lg shadow-sm">
-              <div class="flex flex-col gap-space-sm">
-                <h3 class="font-headline-sm text-headline-sm text-on-surface">Durasi Timer (Menit)</h3>
-                <div class="grid grid-cols-3 gap-space-md">
-                  <div class="flex flex-col gap-1">
-                    <label class="font-label-sm text-outline">Focus Pomodoro</label>
-                    <input class="bg-surface-container-high p-2.5 rounded-xl text-on-surface font-body-md focus:outline-none" id="setting-pomo-min" value="25" type="number"/>
+            <div class="p-6 bg-surface-container-low border border-surface-container-high flex flex-col gap-6">
+              <div class="flex flex-col gap-3">
+                <h3 class="font-headline-sm text-base text-on-surface uppercase tracking-wider font-semibold">Durasi Timer (Menit)</h3>
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="flex flex-col gap-1.5">
+                    <label class="font-label-sm text-xs text-outline uppercase tracking-wider">Focus Pomodoro</label>
+                    <input class="bg-surface-container border border-surface-container-high p-2.5 text-on-surface font-mono text-sm focus:outline-none focus:border-primary" id="setting-pomo-min" value="25" type="number"/>
                   </div>
-                  <div class="flex flex-col gap-1">
-                    <label class="font-label-sm text-outline">Short Break</label>
-                    <input class="bg-surface-container-high p-2.5 rounded-xl text-on-surface font-body-md focus:outline-none" id="setting-short-min" value="5" type="number"/>
+                  <div class="flex flex-col gap-1.5">
+                    <label class="font-label-sm text-xs text-outline uppercase tracking-wider">Short Break</label>
+                    <input class="bg-surface-container border border-surface-container-high p-2.5 text-on-surface font-mono text-sm focus:outline-none focus:border-primary" id="setting-short-min" value="5" type="number"/>
                   </div>
-                  <div class="flex flex-col gap-1">
-                    <label class="font-label-sm text-outline">Long Break</label>
-                    <input class="bg-surface-container-high p-2.5 rounded-xl text-on-surface font-body-md focus:outline-none" id="setting-long-min" value="15" type="number"/>
+                  <div class="flex flex-col gap-1.5">
+                    <label class="font-label-sm text-xs text-outline uppercase tracking-wider">Long Break</label>
+                    <input class="bg-surface-container border border-surface-container-high p-2.5 text-on-surface font-mono text-sm focus:outline-none focus:border-primary" id="setting-long-min" value="15" type="number"/>
                   </div>
                 </div>
               </div>
 
-              <div class="pt-space-md border-t border-surface-container-highest/40 flex items-center justify-between">
+              <div class="pt-4 border-t border-surface-container-high/50 flex items-center justify-between">
                 <div class="flex flex-col">
-                  <span class="font-headline-sm text-body-lg text-on-surface font-semibold">Reset Semua Data</span>
-                  <span class="font-body-sm text-outline">Kembalikan aplikasi ke pengaturan awal dan hapus cache lokal.</span>
+                  <span class="font-body-sm text-sm text-on-surface font-semibold">Reset Semua Data Lokal</span>
+                  <span class="font-body-sm text-xs text-outline font-light">Mengembalikan pengaturan awal dan membersihkan cache localStorage.</span>
                 </div>
-                <button class="px-space-md py-2 rounded-xl bg-error-container/40 text-error hover:bg-error-container/70 font-label-md font-semibold transition-all" id="reset-data-btn" type="button">
+                <button class="px-5 py-2.5 bg-error-container border border-error/40 text-error hover:bg-error/20 font-label-sm text-xs tracking-wider uppercase transition-all" id="reset-data-btn" type="button">
                   Reset Data
                 </button>
               </div>
@@ -897,107 +996,109 @@
   </div>
 
   <!-- ==================== ACCOUNT CUSTOMIZATION MODAL ==================== -->
-  <div class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden items-center justify-center p-space-md" id="profile-custom-modal">
-    <div class="w-full max-w-md bg-surface-container-low rounded-2xl border border-surface-container-high p-space-lg flex flex-col gap-space-md shadow-2xl">
-      <div class="flex items-center justify-between">
-        <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Kustomisasi Profil Akun</h3>
-        <button class="p-1.5 rounded-lg text-outline hover:text-on-surface" id="close-profile-modal-btn" type="button">
-          <span class="material-symbols-outlined text-[20px]">close</span>
+  <div class="fixed inset-0 bg-background/90 backdrop-blur-md z-50 hidden items-center justify-center p-space-md" id="profile-custom-modal">
+    <div class="w-full max-w-md bg-surface-container-low border border-surface-container-high p-6 flex flex-col gap-5 shadow-2xl relative">
+      <div class="flex items-center justify-between border-b border-surface-container-high/40 pb-3">
+        <h3 class="font-headline-sm text-base text-on-surface font-semibold uppercase tracking-wider">Kustomisasi Profil Akun</h3>
+        <button class="p-1.5 text-outline hover:text-on-surface" id="close-profile-modal-btn" type="button">
+          <span class="material-symbols-outlined text-[18px]">close</span>
         </button>
       </div>
 
-      <form class="flex flex-col gap-space-md" id="profile-custom-form">
+      <form class="flex flex-col gap-4" id="profile-custom-form">
         <!-- Photo Profile Upload Section -->
-        <div class="flex flex-col items-center gap-space-xs my-1">
-          <div class="relative w-20 h-20 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-2xl overflow-hidden border-2 border-primary shadow-md group" id="modal-avatar-preview-box">
-            <span id="modal-avatar-initial">A</span>
+        <div class="flex flex-col items-center gap-2 my-1">
+          <div class="relative w-20 h-20 bg-primary text-on-primary flex items-center justify-center font-bold text-2xl overflow-hidden border border-outline group" id="modal-avatar-preview-box">
+            <span class="font-mono text-xl" id="modal-avatar-initial">A</span>
             <img alt="Avatar Preview" class="w-full h-full object-cover hidden" id="modal-avatar-img" src=""/>
-            <label class="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-              <span class="material-symbols-outlined text-[20px]">photo_camera</span>
-              <span class="text-[9px]">Ubah Foto</span>
+            <label class="absolute inset-0 bg-black/60 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+              <span class="material-symbols-outlined text-[18px]">photo_camera</span>
+              <span class="text-[9px] uppercase tracking-wider font-mono">Ubah Foto</span>
               <input accept="image/*" class="hidden" id="profile-photo-input" type="file"/>
             </label>
           </div>
-          <span class="font-label-sm text-outline">Klik foto untuk mengunggah gambar baru</span>
+          <span class="font-label-sm text-[11px] text-outline">Klik foto untuk mengunggah gambar profil baru</span>
         </div>
 
         <!-- Nickname -->
-        <div class="flex flex-col gap-1">
-          <label class="font-label-sm text-outline">Nickname (Nama Panggilan)</label>
-          <input class="bg-surface-container-high text-on-surface p-2.5 rounded-xl focus:outline-none font-body-sm" id="profile-nickname-input" placeholder="Misal: Alex" required="" type="text"/>
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Nama Panggilan (Nickname)</label>
+          <input class="bg-surface-container border border-surface-container-high text-on-surface p-2.5 font-body-sm text-xs focus:outline-none focus:border-primary" id="profile-nickname-input" placeholder="Misal: Alex" required="" type="text"/>
         </div>
 
         <!-- Quote Personal -->
-        <div class="flex flex-col gap-1">
-          <label class="font-label-sm text-outline">Quotes / Quotes Favorit Kamu</label>
-          <textarea class="bg-surface-container-high text-on-surface p-2.5 rounded-xl focus:outline-none font-body-sm resize-none" id="profile-quote-input" placeholder="Tuliskan kata motivasi atau quotes favorit..." rows="2"></textarea>
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Prinsip Fokus / Quotes Favorit</label>
+          <textarea class="bg-surface-container border border-surface-container-high text-on-surface p-2.5 font-body-sm text-xs focus:outline-none focus:border-primary resize-none" id="profile-quote-input" placeholder="Tuliskan kata motivasi atau quotes favorit..." rows="2"></textarea>
         </div>
 
-        <div class="flex items-center justify-end gap-space-sm pt-space-xs">
-          <button class="px-space-md py-2 rounded-xl bg-surface-container-high text-on-surface font-label-md" id="cancel-profile-modal-btn" type="button">Batal</button>
-          <button class="px-space-md py-2 rounded-xl bg-primary text-on-primary font-label-md font-semibold hover:bg-primary-fixed transition-all shadow-sm" type="submit">Simpan Profil</button>
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button class="px-4 py-2 border border-surface-container-high text-outline hover:text-on-surface font-label-sm text-xs tracking-wider uppercase transition-colors" id="cancel-profile-modal-btn" type="button">Batal</button>
+          <button class="px-5 py-2 bg-primary text-on-primary font-label-sm text-xs tracking-wider uppercase hover:opacity-95 transition-all" type="submit">Simpan Profil</button>
         </div>
       </form>
     </div>
   </div>
 
   <!-- Fullscreen Mode Hening (Zen Mode) Overlay -->
-  <div class="fixed inset-0 bg-background/95 backdrop-blur-2xl z-50 hidden flex-col items-center justify-between p-space-xl text-center" id="zen-overlay">
-    <div class="flex items-center justify-between w-full max-w-4xl">
-      <div class="flex items-center gap-2 text-secondary font-label-md">
-        <span class="material-symbols-outlined text-[18px]">self_improvement</span>
+  <div class="fixed inset-0 bg-background/98 backdrop-blur-2xl z-50 hidden flex-col items-center justify-between p-10 text-center" id="zen-overlay">
+    <div class="flex items-center justify-between w-full max-w-4xl border-b border-surface-container-high/40 pb-4">
+      <div class="flex items-center gap-2 text-secondary font-label-sm text-xs uppercase tracking-widest">
+        <span class="material-symbols-outlined text-[16px]">self_improvement</span>
         <span>Mode Hening Aktif</span>
       </div>
-      <div class="flex items-center gap-space-sm">
-        <button class="p-2.5 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-all" id="zen-audio-toggle" title="Toggle Ambience Audio" type="button">
-          <span class="material-symbols-outlined text-[20px]" id="zen-audio-icon">volume_off</span>
+      <div class="flex items-center gap-3">
+        <button class="p-2 bg-surface-container border border-surface-container-high text-on-surface transition-all" id="zen-audio-toggle" title="Toggle Ambience Audio" type="button">
+          <span class="material-symbols-outlined text-[18px]" id="zen-audio-icon">volume_off</span>
         </button>
-        <button class="px-space-md py-2 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md transition-all flex items-center gap-1.5" id="exit-zen-btn" type="button">
-          <span class="material-symbols-outlined text-[18px]">close</span>
+        <button class="px-4 py-2 border border-surface-container-high text-on-surface font-label-sm text-xs tracking-wider uppercase transition-all flex items-center gap-1.5" id="exit-zen-btn" type="button">
+          <span class="material-symbols-outlined text-[16px]">close</span>
           <span>Keluar (ESC)</span>
         </button>
       </div>
     </div>
 
-    <div class="flex flex-col items-center gap-space-md my-auto">
-      <span class="font-display text-[96px] text-on-surface font-bold tracking-tighter leading-none" id="zen-clock">10:42</span>
-      <p class="font-headline-md text-headline-md text-tertiary-fixed font-medium max-w-lg">"Keheningan adalah tempat terbaik untuk melahirkan karya hebat."</p>
+    <div class="flex flex-col items-center gap-6 my-auto">
+      <span class="font-mono text-7xl sm:text-9xl text-on-surface font-light tracking-tight leading-none" id="zen-clock">10:42</span>
+      <p class="font-headline-md text-xl sm:text-2xl text-on-surface-variant font-light italic max-w-lg">
+        "Keheningan adalah ruang terbaik untuk melahirkan karya hebat."
+      </p>
     </div>
 
-    <div class="text-outline font-label-sm">
-      Tekan ESC atau tombol Keluar di kanan atas untuk kembali ke dashboard.
+    <div class="text-outline font-label-sm text-xs tracking-wider uppercase">
+      Tekan ESC atau tombol Keluar untuk kembali ke dashboard kerja
     </div>
   </div>
 
   <!-- Global Modal: New Flow Item -->
-  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-space-md" id="new-flow-modal">
-    <div class="w-full max-w-md bg-surface-container-low rounded-2xl border border-surface-container-high p-space-lg flex flex-col gap-space-md shadow-2xl">
-      <div class="flex items-center justify-between">
-        <h3 class="font-headline-sm text-headline-sm text-on-surface">Tambah Flow Item</h3>
-        <button class="p-1.5 rounded-lg text-outline hover:text-on-surface" id="close-modal-btn" type="button">
-          <span class="material-symbols-outlined text-[20px]">close</span>
+  <div class="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 hidden items-center justify-center p-space-md" id="new-flow-modal">
+    <div class="w-full max-w-md bg-surface-container-low border border-surface-container-high p-6 flex flex-col gap-5 shadow-2xl relative">
+      <div class="flex items-center justify-between border-b border-surface-container-high/40 pb-3">
+        <h3 class="font-headline-sm text-base text-on-surface uppercase tracking-wider font-semibold">Tambah Flow Item</h3>
+        <button class="p-1.5 text-outline hover:text-on-surface" id="close-modal-btn" type="button">
+          <span class="material-symbols-outlined text-[18px]">close</span>
         </button>
       </div>
 
-      <form class="flex flex-col gap-space-md" id="modal-flow-form">
-        <div class="flex flex-col gap-1">
-          <label class="font-label-sm text-outline">Tipe Item</label>
-          <select class="bg-surface-container-high text-on-surface p-2.5 rounded-xl focus:outline-none" id="modal-flow-type">
+      <form class="flex flex-col gap-4" id="modal-flow-form">
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Tipe Item</label>
+          <select class="bg-surface-container border border-surface-container-high text-on-surface p-2.5 font-label-sm text-xs focus:outline-none focus:border-primary" id="modal-flow-type">
             <option value="task">Tugas Baru (Task)</option>
             <option value="habit">Kebiasaan Baru (Habit)</option>
           </select>
         </div>
 
         <!-- Task Fields -->
-        <div class="flex flex-col gap-space-sm" id="modal-task-fields">
-          <div class="flex flex-col gap-1">
-            <label class="font-label-sm text-outline">Judul Tugas</label>
-            <input class="bg-surface-container-high text-on-surface p-2.5 rounded-xl focus:outline-none font-body-sm" id="modal-task-title" placeholder="Misal: Review arsitektur database..." type="text"/>
+        <div class="flex flex-col gap-3" id="modal-task-fields">
+          <div class="flex flex-col gap-1.5">
+            <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Judul Tugas</label>
+            <input class="bg-surface-container border border-surface-container-high text-on-surface p-2.5 font-body-sm text-xs focus:outline-none focus:border-primary" id="modal-task-title" placeholder="Misal: Review arsitektur sistem modular..." type="text"/>
           </div>
-          <div class="grid grid-cols-3 gap-space-sm">
+          <div class="grid grid-cols-3 gap-3">
             <div class="flex flex-col gap-1">
-              <label class="font-label-sm text-outline">Tag</label>
-              <select class="bg-surface-container-high text-on-surface p-2 rounded-xl text-label-sm focus:outline-none" id="modal-task-tag">
+              <label class="font-label-sm text-[11px] uppercase tracking-wider text-outline">Tag</label>
+              <select class="bg-surface-container border border-surface-container-high text-on-surface p-2 font-label-sm text-xs focus:outline-none" id="modal-task-tag">
                 <option value="Tech">Tech</option>
                 <option value="Docs">Docs</option>
                 <option value="Design">Design</option>
@@ -1005,31 +1106,31 @@
               </select>
             </div>
             <div class="flex flex-col gap-1">
-              <label class="font-label-sm text-outline">Prioritas</label>
-              <select class="bg-surface-container-high text-on-surface p-2 rounded-xl text-label-sm focus:outline-none" id="modal-task-priority">
+              <label class="font-label-sm text-[11px] uppercase tracking-wider text-outline">Prioritas</label>
+              <select class="bg-surface-container border border-surface-container-high text-on-surface p-2 font-label-sm text-xs focus:outline-none" id="modal-task-priority">
                 <option value="High">High</option>
                 <option value="Med" selected>Med</option>
                 <option value="Low">Low</option>
               </select>
             </div>
             <div class="flex flex-col gap-1">
-              <label class="font-label-sm text-outline">Estimasi</label>
-              <input class="bg-surface-container-high text-on-surface p-2 rounded-xl text-label-sm focus:outline-none" id="modal-task-estimate" placeholder="25m" value="25m" type="text"/>
+              <label class="font-label-sm text-[11px] uppercase tracking-wider text-outline">Estimasi</label>
+              <input class="bg-surface-container border border-surface-container-high text-on-surface p-2 font-mono text-xs focus:outline-none" id="modal-task-estimate" placeholder="25m" value="25m" type="text"/>
             </div>
           </div>
         </div>
 
         <!-- Habit Fields -->
-        <div class="flex flex-col gap-space-sm hidden" id="modal-habit-fields">
-          <div class="flex flex-col gap-1">
-            <label class="font-label-sm text-outline">Nama Kebiasaan</label>
-            <input class="bg-surface-container-high text-on-surface p-2.5 rounded-xl focus:outline-none font-body-sm" id="modal-habit-name" placeholder="Misal: Olahraga 20 Menit..." type="text"/>
+        <div class="flex flex-col gap-3 hidden" id="modal-habit-fields">
+          <div class="flex flex-col gap-1.5">
+            <label class="font-label-sm text-xs uppercase tracking-wider text-outline">Nama Kebiasaan</label>
+            <input class="bg-surface-container border border-surface-container-high text-on-surface p-2.5 font-body-sm text-xs focus:outline-none focus:border-primary" id="modal-habit-name" placeholder="Misal: Minum 2L Air / Meditasi 10m..." type="text"/>
           </div>
         </div>
 
-        <div class="flex items-center justify-end gap-space-sm pt-space-xs">
-          <button class="px-space-md py-2 rounded-xl bg-surface-container-high text-on-surface font-label-md" id="cancel-modal-btn" type="button">Batal</button>
-          <button class="px-space-md py-2 rounded-xl bg-primary text-on-primary font-label-md font-semibold hover:bg-primary-fixed transition-all" type="submit">Simpan Item</button>
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button class="px-4 py-2 border border-surface-container-high text-outline hover:text-on-surface font-label-sm text-xs tracking-wider uppercase transition-colors" id="cancel-modal-btn" type="button">Batal</button>
+          <button class="px-5 py-2 bg-primary text-on-primary font-label-sm text-xs tracking-wider uppercase hover:opacity-95 transition-all" type="submit">Simpan Item</button>
         </div>
       </form>
     </div>
